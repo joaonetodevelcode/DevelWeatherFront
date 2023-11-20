@@ -9,16 +9,18 @@ import iconVento from '../../assets/icons/cardinformation/wind.png'
 interface CardInfos {
     humidade?: string
     chanceChuva?: string
-    vento?: string 
+    vento?: string
+    color: string
 }
 
 export default function CardInformation({
     humidade,
     chanceChuva,
-    vento
+    vento,
+    color
 }: CardInfos) {
     return(
-            <View style={styles.container}>
+            <View style={[styles.container, {backgroundColor: color}]}>
                 <View style={styles.informacoes}>
                 <Image source={iconChuva} />
                 <Text style={styles.texto}>{chanceChuva}%</Text>
@@ -42,7 +44,6 @@ const styles = StyleSheet.create({
         height: '5%',
         width: '90%',
         flexDirection: 'row',
-        backgroundColor: 'rgba(8, 36, 79, 0.6)',
         justifyContent: 'space-between',
         alignItems: 'center',
         borderRadius: 20,
@@ -60,4 +61,3 @@ const styles = StyleSheet.create({
 
 })
 
-//ba4f4c84c18821a70163d0b64c213110
