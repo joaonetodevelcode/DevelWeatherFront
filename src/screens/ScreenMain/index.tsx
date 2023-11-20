@@ -14,9 +14,10 @@ import { climates } from '../../api/climates';
 import ScreenLoading from '../ScreenLoading';
 import { requestLocation } from '../../service/locationService';
 import { temperatureConversion } from '../../service/temperatureService';
+import { getCityName } from '../../api/apiGoogleMaps';
 
 export default function TelaPrincipal() {
-    const [cidade, setCidade] = useState('maraba')
+    const [cidade, setCidade] = useState('')
     const clima = "mist"
     const [icone, setIcone] = useState(null)
     const [temperatura, setTemperatura] = useState('')
@@ -30,8 +31,9 @@ export default function TelaPrincipal() {
     async function dadosClima(cidade: string) {
         userLocation = await requestLocation();
         if(userLocation){
-            console.log(userLocation[0], userLocation[1], "aquii")
+            console.log("NOVA REQUISICAO")
             const resultado = await pegarDadosClima(userLocation[0], userLocation[1])
+            const responseMapsApi = await getCityName(userLocation[0], userLocation[1])
             setIcone(resultado.weather[0].description)
             setTemperatura(resultado.main.temp)
             setHumidade(resultado.main.humidity)
@@ -39,6 +41,7 @@ export default function TelaPrincipal() {
             setChanceChuva(resultado.clouds.all)
             setTemperaturaMax(resultado.main.temp_max)
             setTemperaturaMin(resultado.main.temp_min)
+            setCidade(responseMapsApi);
         }
     }
     
