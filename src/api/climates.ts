@@ -39,31 +39,31 @@ export const climates: ClimateType = {
     "few clouds": {
         dinamico: fewcloudsDinamico,
         estatico: fewclouds,
-        cor: ['#29B2DD','#33AADD','#2DC8EA']
+        cor: ['#F0F8FF', '#87CEEB', '#ADD8E6']
     },
 
     "scattered clouds": {
         dinamico: scatteredcloudsDinamico,
         estatico: scatteredclouds,
-        cor: ['#29B2DD','#33AADD','#2DC8EA']
+        cor: ['#87CEFA', '#AED6F1', '#B0C4DE']
     },
     
     "broken clouds": {
         dinamico: fewcloudsDinamico,
         estatico: brokenclouds,
-        cor: ['#29B2DD','#33AADD','#2DC8EA']
+        cor: ['#778899', '#708090', '#696969']
     },
     
     "shower rain": {
         dinamico: showerrainDinamico,
         estatico: showerrain,
-        cor: ['#29B2DD','#33AADD','#2DC8EA']
+        cor: ['#4682B4', '#5F9EA0', '#87CEEB']
     },
     
     "rain": {
         dinamico: rainDinamico,
         estatico: rain,
-        cor: ['#29B2DD','#33AADD','#2DC8EA']
+        cor: ['#4682B4', '#778899', '#1E90FF']
     },
     
     "thunderstorm": {
@@ -75,11 +75,11 @@ export const climates: ClimateType = {
     "snow": {
         dinamico: snowDinamico,
         estatico: snow,
-        cor: ['#29B2DD','#33AADD','#2DC8EA']
+        cor: ['#F5F5F5', '#DCDCDC', '#F0F8FF']
     },
     "mist": {
         dinamico: mist,
         estatico: mist,
-        cor: ['#29B2DD','#33AADD','#2DC8EA']
+        cor: ['#D3D3D3', '#C0C0C0', '#A9A9A9']
     },
 }
