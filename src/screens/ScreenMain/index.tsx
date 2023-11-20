@@ -15,8 +15,10 @@ import ScreenLoading from '../ScreenLoading';
 import { requestLocation } from '../../service/locationService';
 import { temperatureConversion } from '../../service/temperatureService';
 import { getCityName } from '../../api/apiGoogleMaps';
+import CityModal from '../../components/CityModal';
 
 export default function TelaPrincipal() {
+    const [visibleModal, setVisibleModal] = useState(false) 
     const [cidade, setCidade] = useState('')
     const clima = "mist"
     const [icone, setIcone] = useState(null)
@@ -67,11 +69,20 @@ export default function TelaPrincipal() {
            
             <TouchableOpacity
                 style={styles.botaoModal}
+                onPress={() => setVisibleModal(true)}
             >
                 <Image source={iconLocation} style={styles.iconLocalizacao}/>
                 <Text style={styles.localizacao}> {cidade} </Text>
                 <Image source={iconSetaBaixo} style={styles.iconSeta}/>
             </TouchableOpacity>
+
+            <Modal
+                visible={visibleModal}
+                transparent={true}
+                onRequestClose={() => setVisibleModal(false)}
+            >
+                <CityModal handleClose={() => setVisibleModal(false)}/>
+            </Modal>
 
 
             <Text style={styles.texto}>{temperatureConversion(temperatura)}°C</Text>
