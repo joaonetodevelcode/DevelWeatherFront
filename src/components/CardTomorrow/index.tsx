@@ -10,15 +10,17 @@ interface CardAmanha {
     humidade?: string
     chanceChuva?: string
     vento?: string 
+    color: string
 }
 
 export default function CardTomorrow({
     humidade,
     chanceChuva,
-    vento
+    vento,
+    color
 }: CardAmanha) {
     return(
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor: color}]}>
             <View style={styles.amanha}>
                 <Text style={styles.titulo}>Amanhã</Text>
                 <Text style={styles.texto2}>Mar,9</Text>
@@ -54,7 +56,6 @@ const styles = StyleSheet.create({
     container: {
         height: '25%',
         width: '90%',
-        backgroundColor: 'rgba(8, 36, 79, 0.6)',
         borderRadius: 20,
         padding: 15,
         marginTop: 20,

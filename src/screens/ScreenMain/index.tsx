@@ -15,8 +15,8 @@ import ScreenLoading from '../ScreenLoading';
 import { requestLocation } from '../../service/locationService';
 
 export default function TelaPrincipal() {
-    const [cidade, setCidade] = useState('Ipatinga')
-    const clima = "clear sky"
+    const [cidade, setCidade] = useState('maraba')
+    const clima = "mist"
     const [icone, setIcone] = useState(null)
     const [temperatura, setTemperatura] = useState('')
     const [humidade, setHumidade] = useState('')
@@ -80,12 +80,14 @@ export default function TelaPrincipal() {
                 chanceChuva={chanceChuva}
                 humidade={humidade}
                 vento={vento}
+                color={climates[`${icone}`].background}
             />
 
             <CardTomorrow 
                 chanceChuva='6'
                 humidade='90'
                 vento='19'
+                color={climates[`${icone}`].background}
             />
             
         </LinearGradient> 
