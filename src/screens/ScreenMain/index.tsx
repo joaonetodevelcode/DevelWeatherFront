@@ -13,6 +13,7 @@ import { pegarDadosClima } from '../../api/apiClimate';
 import { climates } from '../../api/climates';
 import ScreenLoading from '../ScreenLoading';
 import { requestLocation } from '../../service/locationService';
+import { temperatureConversion } from '../../service/temperatureService';
 
 export default function TelaPrincipal() {
     const [cidade, setCidade] = useState('maraba')
@@ -70,11 +71,11 @@ export default function TelaPrincipal() {
             </TouchableOpacity>
 
 
-            <Text style={styles.texto}>{temperatura}°</Text>
+            <Text style={styles.texto}>{temperatureConversion(temperatura)}°C</Text>
 
             <Text style={styles.textoPrevisao}>{icone}</Text>
 
-            <Text style={styles.textoMeio}>Max.: {temperaturaMax}°C   Min.: {temperaturaMin}°C</Text>
+            <Text style={styles.textoMeio}>Max.: {temperatureConversion(temperaturaMax)}°C   Min.: {temperatureConversion(temperaturaMin)}°C</Text>
            
             <CardInformation 
                 chanceChuva={chanceChuva}
