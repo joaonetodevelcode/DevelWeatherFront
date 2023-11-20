@@ -14,8 +14,8 @@ import { climates } from '../../api/climates';
 import ScreenLoading from '../ScreenLoading';
 
 export default function TelaPrincipal() {
-    const [cidade, setCidade] = useState('Ipatinga')
-    const clima = "clear sky"
+    const [cidade, setCidade] = useState('maraba')
+    const clima = "mist"
     const [icone, setIcone] = useState(null)
     const [temperatura, setTemperatura] = useState('')
     const [humidade, setHumidade] = useState('')
@@ -44,7 +44,6 @@ export default function TelaPrincipal() {
     return(
         <LinearGradient
         // Background Linear Gradient
-        // climates[`${icone}`].cor
         colors={climates[`${icone}`].cor}
         start={{ x: 0, y: 0 }} // Ponto de início (canto superior esquerdo)
         end={{ x: 1, y: 1 }}   // Ponto de fim (canto superior direito)
@@ -75,14 +74,14 @@ export default function TelaPrincipal() {
                 chanceChuva={chanceChuva}
                 humidade={humidade}
                 vento={vento}
-                color='rgba(8, 36, 79, 0.6)'
+                color={climates[`${icone}`].background}
             />
 
             <CardTomorrow 
                 chanceChuva='6'
                 humidade='90'
                 vento='19'
-                color='rgba(8, 36, 79, 0.6)'
+                color={climates[`${icone}`].background}
             />
             
         </LinearGradient> 
