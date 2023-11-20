@@ -12,6 +12,7 @@ import { pegarDadosClima } from '../../api/apiClimate';
 
 import { climates } from '../../api/climates';
 import ScreenLoading from '../ScreenLoading';
+import { requestLocation } from '../../service/locationService';
 
 export default function TelaPrincipal() {
     const [cidade, setCidade] = useState('maraba')
@@ -23,16 +24,21 @@ export default function TelaPrincipal() {
     const [vento, setVento] = useState('')
     const [temperaturaMax, setTemperaturaMax] = useState('')
     const [temperaturaMin, setTemperaturaMin] = useState('')
+    let userLocation: number[] | undefined = []
 
     async function dadosClima(cidade: string) {
-        const resultado = await pegarDadosClima(cidade)
-        setIcone(resultado.weather[0].description)
-        setTemperatura(resultado.main.temp)
-        setHumidade(resultado.main.humidity)
-        setVento(resultado.wind.speed)
-        setChanceChuva(resultado.clouds.all)
-        setTemperaturaMax(resultado.main.temp_max)
-        setTemperaturaMin(resultado.main.temp_min)
+        userLocation = await requestLocation();
+        if(userLocation){
+            console.log(userLocation[0], userLocation[1], "aquii")
+            const resultado = await pegarDadosClima(userLocation[0], userLocation[1])
+            setIcone(resultado.weather[0].description)
+            setTemperatura(resultado.main.temp)
+            setHumidade(resultado.main.humidity)
+            setVento(resultado.wind.speed)
+            setChanceChuva(resultado.clouds.all)
+            setTemperaturaMax(resultado.main.temp_max)
+            setTemperaturaMin(resultado.main.temp_min)
+        }
     }
     
     useEffect(() => {
