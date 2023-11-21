@@ -1,36 +1,68 @@
-import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
-import { InputText } from "../inputText";
-import Button from "../Button";
-
+import React, { useState } from "react";
+import { FlatList, View, StyleSheet, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { getCityName, getDataCityByName } from "../../api/apiGoogleMaps";
+import { CardCity } from "../CardCity/idex";
 interface CityModalInterface {
     handleClose: () => void
+    climateData: (lat: number, lng: number) => Promise<any>
 }
 
+const CITYS: any = [];
+
 export default function CityModal({
-    handleClose
+    handleClose,
+    climateData,
 }: CityModalInterface) {
+    const [newCity, setNewCity] = useState('')
+
+    async function searchDataCity(city: string) {
+        const dataCity = await getDataCityByName(city)
+        if(dataCity) {
+            await climateData(dataCity[0], dataCity[1])
+            handleClose();
+        }
+    } 
+
+    async function insertNewCity(newCity:string) {
+        const dataCity = await getDataCityByName(newCity)
+        if(dataCity) {
+            await climateData(dataCity[0], dataCity[1]);
+            const nameCity = await getCityName(dataCity[0], dataCity[1]);
+            const newObject = { name: nameCity, state: 'TAL', country: 'aquele la'}
+            CITYS.push(newObject);
+            handleClose();
+        }
+    }
+
     return <View style={styles.container}>
         <View style={styles.content}>
             <View style={styles.search}>
                 <TextInput
                     style={styles.input}
-                    placeholder="Digite o nome da Cidade"
+                    placeholder="Adicione uma Cidade"
+                    value={newCity}
+                    onChangeText={setNewCity}
                 />
                 <TouchableOpacity
                   style={styles.button}
+                  onPress={() => insertNewCity(newCity)}
                 >
-                    <Text>Buscar</Text>
+                    <Text>Adicionar</Text>
                 </TouchableOpacity>
             </View>
 
-            <ScrollView>
-                <View>
-                    <Text>NOMDE DA CIDADE</Text>
-                    <Text>PAÍS</Text>
-                    <Text>ESTADO</Text>
-                </View>
-            </ScrollView>
+            <FlatList
+                data={CITYS}
+                renderItem={({item}) => 
+                <CardCity 
+                    name={item.name} 
+                    state={item.state} 
+                    country={item.country} 
+                    searchCity={() => searchDataCity(item.name)}
+                    />}
+                keyExtractor={item => item.name}
+                style={styles.list}
+            />
             
         </View>
 
@@ -75,5 +107,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#696969',
         width: '30%',
         height: 40
+    },
+    list: {
+        width: '100%'
     }
 })
