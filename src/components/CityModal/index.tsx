@@ -1,19 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FlatList, View, StyleSheet, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { getCityName, getDataCityByName } from "../../api/apiGoogleMaps";
 import { CardCity } from "../CardCity/idex";
+import { requestLocation } from "../../service/locationService";
 interface CityModalInterface {
     handleClose: () => void
     climateData: (lat: number, lng: number) => Promise<any>
+    userCity: string
+}
+interface City {
+    name: string
+    state: string
+    country: string
 }
 
-const CITYS: any = [];
+export const CITYS: City[] = [];
 
 export default function CityModal({
     handleClose,
     climateData,
+    userCity
 }: CityModalInterface) {
     const [newCity, setNewCity] = useState('')
+    
+    function insertInCitys(newCity: string) {
+        const exist = CITYS.find(city => city.name === newCity)
+        if(!exist) {
+            const newObject1 = { name: newCity, state: 'TAL', country: 'aquele la'}
+            CITYS.push(newObject1);
+        }
+    }
+   
 
     async function searchDataCity(city: string) {
         const dataCity = await getDataCityByName(city)
@@ -28,13 +45,21 @@ export default function CityModal({
         if(dataCity) {
             await climateData(dataCity[0], dataCity[1]);
             const nameCity = await getCityName(dataCity[0], dataCity[1]);
-            const newObject = { name: nameCity, state: 'TAL', country: 'aquele la'}
-            CITYS.push(newObject);
+            insertInCitys(nameCity)
             handleClose();
         }
     }
 
-    return <View style={styles.container}>
+    if (!userCity){ 
+        
+        return ( 
+        <View style={styles.container} >
+            <Text>CARREGANDO...</Text>
+        </View>
+    )}
+
+    return( 
+    <View style={styles.container}>
         <View style={styles.content}>
             <View style={styles.search}>
                 <TextInput
@@ -69,7 +94,7 @@ export default function CityModal({
         <TouchableOpacity style={{ height: '60%', width: '100%' }} onPress={handleClose}></TouchableOpacity>   
         
     </View>
-}
+)}
 
 const styles = StyleSheet.create({
     container: {
