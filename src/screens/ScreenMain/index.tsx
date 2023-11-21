@@ -16,6 +16,7 @@ import { requestLocation } from '../../service/locationService';
 import { temperatureConversion } from '../../service/temperatureService';
 import { getCityName } from '../../api/apiGoogleMaps';
 import CityModal from '../../components/CityModal';
+import { CITYS } from '../../components/CityModal';
 
 export default function TelaPrincipal() {
     const [visibleModal, setVisibleModal] = useState(false) 
@@ -31,6 +32,7 @@ export default function TelaPrincipal() {
     let userLocation: number[] | undefined = []
     let latitude: number;
     let longitude: number;
+    let cityName: string
 
     async function dadosClima(lat: number, lng: number) {
         if(lat) {
@@ -52,7 +54,7 @@ export default function TelaPrincipal() {
         if(userLocation){
             console.log("NOVA REQUISICAO")
             const resultado = await pegarDadosClima(userLocation[0], userLocation[1])
-            const cityName = await getCityName(userLocation[0], userLocation[1])
+            cityName = await getCityName(userLocation[0], userLocation[1])
             setIcone(resultado.weather[0].description)
             setTemperatura(resultado.main.temp)
             setHumidade(resultado.main.humidity)
@@ -61,6 +63,8 @@ export default function TelaPrincipal() {
             setTemperaturaMax(resultado.main.temp_max)
             setTemperaturaMin(resultado.main.temp_min)
             setCidade(cityName);
+            const newObject1 = { name: cityName, state: 'TAL', country: 'aquele la'}
+            CITYS.push(newObject1);
         }
     }
     
@@ -101,6 +105,7 @@ export default function TelaPrincipal() {
                 <CityModal 
                     climateData={(lat: number, lng: number) => dadosClima(lat, lng)}
                     handleClose={() => setVisibleModal(false)}
+                    userCity={cidade}
                     />
             </Modal>
 
