@@ -26,7 +26,11 @@ export function AuthProvider ({children}: AuthProviderProps) {
       }
     }
 
-    const value = {login}
+    function logout() {
+      setUser({})
+    }
+
+    const value = {login, logout, user}
 
     return (
         <AuthContext.Provider value={ value }>

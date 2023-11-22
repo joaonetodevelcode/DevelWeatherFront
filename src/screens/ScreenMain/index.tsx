@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { Text, Modal, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from './styles';
@@ -17,8 +17,9 @@ import { temperatureConversion } from '../../service/temperatureService';
 import { getCityName } from '../../api/apiGoogleMaps';
 import CityModal from '../../components/CityModal';
 import { CITYS } from '../../components/CityModal';
+import { AuthContext } from '../../context/authContext';
 
-export default function TelaPrincipal() {
+export default function TelaPrincipal({navigation}: any) {
     const [visibleModal, setVisibleModal] = useState(false) 
     const [cidade, setCidade] = useState('')
     const clima = "mist"
@@ -32,7 +33,10 @@ export default function TelaPrincipal() {
     let userLocation: number[] | undefined = []
     let latitude: number;
     let longitude: number;
-    let cityName: string
+    let cityName: string;
+
+    const {logout, user}: any = useContext(AuthContext) 
+
 
     async function dadosClima(lat: number, lng: number) {
         if(lat) {
@@ -72,6 +76,8 @@ export default function TelaPrincipal() {
             dadosClima(latitude, longitude)
     }, []);
 
+    if (Object.keys(user).length === 0) return navigation.navigate('Login')
+
     if (!icone) return <ScreenLoading />
     
     return(
@@ -99,6 +105,7 @@ export default function TelaPrincipal() {
 
             <TouchableOpacity
                 style={styles.buttonLogout}
+                onPress={() => logout()}
             >
                 <Text style={styles.localizacao}> Sair </Text>
             </TouchableOpacity>
