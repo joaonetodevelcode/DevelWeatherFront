@@ -8,7 +8,7 @@ import LottieView from "lottie-react-native";
 import CardTomorrow from '../../components/CardTomorrow';
 import iconLocation from '../../assets/icons/location.png';
 import iconSetaBaixo from '../../assets/icons/downArrow.png';
-import { getCurrentClimateData } from '../../api/apiClimate';
+import { getCurrentClimateData, getTomorrowClimateData } from '../../api/apiClimate';
 
 import { climates } from '../../api/climates';
 import ScreenLoading from '../ScreenLoading';
@@ -30,6 +30,7 @@ export default function TelaPrincipal({navigation}: any) {
     const [vento, setVento] = useState('')
     const [temperaturaMax, setTemperaturaMax] = useState('')
     const [temperaturaMin, setTemperaturaMin] = useState('')
+    const [climateDataTomorrow, setClimateDataTomorrow] = useState<any[]>([])
     let userLocation: number[] | undefined = []
     let latitude: number;
     let longitude: number;
@@ -42,6 +43,7 @@ export default function TelaPrincipal({navigation}: any) {
         if(lat) {
             console.log('TA ENTRANDO')
             const resultado = await getCurrentClimateData(lat, lng)
+            const climateTomorrow = await getTomorrowClimateData(lat, lng)
             const cityName = await getCityName(lat, lng)
             console.log(resultado)
             setIcone(resultado[0])
@@ -52,12 +54,14 @@ export default function TelaPrincipal({navigation}: any) {
             setVento(resultado[5])
             setChanceChuva(resultado[6])
             setCidade(cityName)
+            setClimateDataTomorrow(climateTomorrow)
             return
         }
         userLocation = await requestLocation();
         if(userLocation){
             console.log("NOVA REQUISICAO")
             const resultado = await getCurrentClimateData(userLocation[0], userLocation[1])
+            const climateTomorrow = await getTomorrowClimateData(userLocation[0], userLocation[1])
             cityName = await getCityName(userLocation[0], userLocation[1])
             setIcone(resultado[0])
             setTemperatura(resultado[1])
@@ -66,6 +70,7 @@ export default function TelaPrincipal({navigation}: any) {
             setHumidade(resultado[4])
             setVento(resultado[5])
             setChanceChuva(resultado[6])
+            setClimateDataTomorrow(climateTomorrow)
             setCidade(cityName);
             const newObject1 = { name: cityName, state: 'TAL', country: 'aquele la'}
             CITYS.push(newObject1);
@@ -141,9 +146,12 @@ export default function TelaPrincipal({navigation}: any) {
             />
 
             <CardTomorrow 
-                chanceChuva='6'
-                humidade='90'
-                vento='19'
+                climate={climateDataTomorrow[0]}
+                temperatureMax={climateDataTomorrow[2]}
+                temperatureMin={climateDataTomorrow[3]}
+                humidity={climateDataTomorrow[4]}
+                wind={climateDataTomorrow[5]}
+                clouds={climateDataTomorrow[6]}
                 color={climates[`${icone}`].background}
             />
             
