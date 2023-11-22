@@ -2,35 +2,20 @@ import React, { useEffect, useRef, useState } from "react";
 import { FlatList, View, StyleSheet, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { getCityName, getDataCityByName } from "../../api/apiGoogleMaps";
 import { CardCity } from "../CardCity/idex";
-import { requestLocation } from "../../service/locationService";
+import { CITYS, insertInCitys } from "../../mocks/citys";
 interface CityModalInterface {
     handleClose: () => void
     climateData: (lat: number, lng: number) => Promise<any>
     userCity: string
 }
-interface City {
-    name: string
-    state: string
-    country: string
-}
 
-export const CITYS: City[] = [];
 
 export default function CityModal({
     handleClose,
     climateData,
     userCity
 }: CityModalInterface) {
-    const [newCity, setNewCity] = useState('')
-    
-    function insertInCitys(newCity: string) {
-        const exist = CITYS.find(city => city.name === newCity)
-        if(!exist) {
-            const newObject1 = { name: newCity, state: 'TAL', country: 'aquele la'}
-            CITYS.push(newObject1);
-        }
-    }
-   
+    const [newCity, setNewCity] = useState('')   
 
     async function searchDataCity(city: string) {
         const dataCity = await getDataCityByName(city)

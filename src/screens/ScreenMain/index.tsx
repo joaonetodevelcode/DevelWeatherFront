@@ -16,7 +16,7 @@ import { requestLocation } from '../../service/locationService';
 import { temperatureConversion } from '../../service/temperatureService';
 import { getCityName } from '../../api/apiGoogleMaps';
 import CityModal from '../../components/CityModal';
-import { CITYS } from '../../components/CityModal';
+import { insertInCitys } from '../../mocks/citys';
 import { AuthContext } from '../../context/authContext';
 
 export default function TelaPrincipal({navigation}: any) {
@@ -72,8 +72,7 @@ export default function TelaPrincipal({navigation}: any) {
             setChanceChuva(resultado[6])
             setClimateDataTomorrow(climateTomorrow)
             setCidade(cityName);
-            const newObject1 = { name: cityName, state: 'TAL', country: 'aquele la'}
-            CITYS.push(newObject1);
+            insertInCitys(cityName)
             return
         }
     }
