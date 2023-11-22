@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
 import iconChuva from '../../assets/icons/cardinformation/chanceOfRain.png'
 import iconHumidade from '../../assets/icons/cardinformation/humidity.png'
 import iconVento from '../../assets/icons/cardinformation/wind.png'
 import iconeTempo from '../../assets/icons/static/showerrain.png';
+
+import { getTomorrowClimateData } from '../../api/apiClimate';
+import { requestLocation } from '../../service/locationService';
+import { climates } from '../../api/climates';
 
 interface CardAmanha {
     humidade?: string
@@ -19,6 +23,47 @@ export default function CardTomorrow({
     vento,
     color
 }: CardAmanha) {
+    const [climate, setClimate] = useState(null)
+    const [temperature, setTemperature] = useState('')
+    const [temperatureMax, setTemperatureMax] = useState('')
+    const [temperatureMin, setTemperatureMin] = useState('')
+    const [humidity, setHumidity] = useState('')
+    const [wind, setWind] = useState('')
+    const [clouds, setClouds] = useState('')
+    let userLocation: number[] | undefined = []
+    let latitude: number;
+    let longitude: number;
+
+    async function getClimateData(lat: number, lng: number) {
+        if(lat) {
+            const resultado = await getTomorrowClimateData(lat, lng)
+            setClimate(resultado[0])
+            setTemperature(resultado[1])
+            setTemperatureMax(resultado[2])
+            setTemperatureMin(resultado[3])
+            setHumidity(resultado[4])
+            setWind(resultado[5])
+            setClouds(resultado[6])
+            return
+        }
+        userLocation = await requestLocation();
+        if(userLocation){
+            const resultado = await getTomorrowClimateData(userLocation[0], userLocation[1])
+            setClimate(resultado[0])
+            setTemperature(resultado[1])
+            setTemperatureMax(resultado[2])
+            setTemperatureMin(resultado[3])
+            setHumidity(resultado[4])
+            setWind(resultado[5])
+            setClouds(resultado[6])
+            return
+        }
+    }
+    
+    useEffect(() => {
+        getClimateData(latitude, longitude)
+}, []);
+
     return(
         <View style={[styles.container, {backgroundColor: color}]}>
             <View style={styles.amanha}>
