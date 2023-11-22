@@ -71,12 +71,15 @@ export default function TelaPrincipal({navigation}: any) {
             CITYS.push(newObject1);
         }
     }
+
+    function handleLogout(){
+        logout()
+        navigation.navigate('Login')
+    }
     
     useEffect(() => {
             dadosClima(latitude, longitude)
     }, []);
-
-    if (Object.keys(user).length === 0) return navigation.navigate('Login')
 
     if (!icone) return <ScreenLoading />
     
@@ -105,7 +108,7 @@ export default function TelaPrincipal({navigation}: any) {
 
             <TouchableOpacity
                 style={styles.buttonLogout}
-                onPress={() => logout()}
+                onPress={() => handleLogout()}
             >
                 <Text style={styles.localizacao}> Sair </Text>
             </TouchableOpacity>
