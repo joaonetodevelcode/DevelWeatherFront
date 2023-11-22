@@ -8,6 +8,7 @@ import showerrainDinamico from '../assets/icons/dynamic/showerrain.json';
 import rainDinamico from '../assets/icons/dynamic/rain.json';
 import thunderstormDinamico from '../assets/icons/dynamic/thunderstorm.json';
 import snowDinamico from '../assets/icons/dynamic/snow.json';
+import mistDynamic from '../assets/icons/dynamic/mist.json'
 
 //Imports estatico
 import clearsky from '../assets/icons/static/clearsky.png';
@@ -55,14 +56,14 @@ export const climates: ClimateType = {
     },
     
     "broken clouds": {
-        dinamico: fewcloudsDinamico,
+        dinamico: brokencloudsDinamico,
         estatico: brokenclouds,
         cor: ['#778899', '#708090', '#696969'],
         background: 'rgba(119, 136, 153, 1)'
     },
 
     "overcast clouds": {
-        dinamico: fewcloudsDinamico,
+        dinamico: brokencloudsDinamico,
         estatico: brokenclouds,
         cor: ['#778899', '#708090', '#696969'],
         background: 'rgba(119, 136, 153, 1)'
@@ -361,70 +362,70 @@ export const climates: ClimateType = {
 
     //Atmosphere
     "mist": {
-        dinamico: mist,
+        dinamico: mistDynamic,
         estatico: mist,
         cor: ['#D3D3D3', '#C0C0C0', '#A9A9A9'],
         background: 'rgba(211, 211, 211, 0.4)'
     },
 
     "smoke": {
-        dinamico: mist,
+        dinamico: mistDynamic,
         estatico: mist,
         cor: ['#D3D3D3', '#C0C0C0', '#A9A9A9'],
         background: 'rgba(211, 211, 211, 0.4)'
     },
 
     "sand/dust whirls": {
-        dinamico: mist,
+        dinamico: mistDynamic,
         estatico: mist,
         cor: ['#D3D3D3', '#C0C0C0', '#A9A9A9'],
         background: 'rgba(211, 211, 211, 0.4)'
     },
 
     "fog": {
-        dinamico: mist,
+        dinamico: mistDynamic,
         estatico: mist,
         cor: ['#D3D3D3', '#C0C0C0', '#A9A9A9'],
         background: 'rgba(211, 211, 211, 0.4)'
     },
 
     "sand": {
-        dinamico: mist,
+        dinamico: mistDynamic,
         estatico: mist,
         cor: ['#D3D3D3', '#C0C0C0', '#A9A9A9'],
         background: 'rgba(211, 211, 211, 0.4)'
     },
 
     "dust": {
-        dinamico: mist,
+        dinamico: mistDynamic,
         estatico: mist,
         cor: ['#D3D3D3', '#C0C0C0', '#A9A9A9'],
         background: 'rgba(211, 211, 211, 0.4)'
     },
 
     "volcanic ash": {
-        dinamico: mist,
+        dinamico: mistDynamic,
         estatico: mist,
         cor: ['#D3D3D3', '#C0C0C0', '#A9A9A9'],
         background: 'rgba(211, 211, 211, 0.4)'
     },
 
     "squalls": {
-        dinamico: mist,
+        dinamico: mistDynamic,
         estatico: mist,
         cor: ['#D3D3D3', '#C0C0C0', '#A9A9A9'],
         background: 'rgba(211, 211, 211, 0.4)'
     },
 
     "tornado": {
-        dinamico: mist,
+        dinamico: mistDynamic,
         estatico: mist,
         cor: ['#D3D3D3', '#C0C0C0', '#A9A9A9'],
         background: 'rgba(211, 211, 211, 0.4)'
     },
 
     "haze": {
-        dinamico: mist,
+        dinamico: mistDynamic,
         estatico: mist,
         cor: ['#D3D3D3', '#C0C0C0', '#A9A9A9'],
         background: 'rgba(211, 211, 211, 0.4)'
