@@ -153,6 +153,7 @@ export default function TelaPrincipal({navigation}: any) {
                 wind={climateDataTomorrow[5]}
                 clouds={climateDataTomorrow[6]}
                 color={climates[`${icone}`].background}
+                icon={climates[`${icone}`].estatico}
             />
             
         </LinearGradient> 

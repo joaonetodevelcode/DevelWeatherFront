@@ -15,7 +15,8 @@ interface CardTomorrowInterface {
     humidity: string,
     wind: string,
     clouds: string,
-    color: string
+    color: string,
+    icon: any
 }
 
 export default function CardTomorrow({
@@ -25,7 +26,8 @@ export default function CardTomorrow({
     humidity,
     wind,
     clouds,
-    color
+    color,
+    icon
 }: CardTomorrowInterface) {
     return(
         <View style={[styles.container, {backgroundColor: color}]}>
@@ -36,7 +38,7 @@ export default function CardTomorrow({
 
             <View style={styles.containerInfos}>
                 <Text style={styles.texto2}>{climate}</Text>
-                <Image source={iconeTempo}/>
+                <Image source={icon}/>
                 <Text style={styles.texto2}>{temperatureConversion(temperatureMax)}°C  {temperatureConversion(temperatureMin)}°C</Text>
             </View>
 
