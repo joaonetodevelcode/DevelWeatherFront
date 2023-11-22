@@ -8,7 +8,7 @@ import LottieView from "lottie-react-native";
 import CardTomorrow from '../../components/CardTomorrow';
 import iconLocation from '../../assets/icons/location.png';
 import iconSetaBaixo from '../../assets/icons/downArrow.png';
-import { pegarDadosClima } from '../../api/apiClimate';
+import { getCurrentClimateData } from '../../api/apiClimate';
 
 import { climates } from '../../api/climates';
 import ScreenLoading from '../ScreenLoading';
@@ -41,34 +41,35 @@ export default function TelaPrincipal({navigation}: any) {
     async function dadosClima(lat: number, lng: number) {
         if(lat) {
             console.log('TA ENTRANDO')
-            const resultado = await pegarDadosClima(lat, lng)
+            const resultado = await getCurrentClimateData(lat, lng)
             const cityName = await getCityName(lat, lng)
             console.log(resultado)
-            setIcone(resultado.weather[0].description)
-            setTemperatura(resultado.main.temp)
-            setHumidade(resultado.main.humidity)
-            setVento(resultado.wind.speed)
-            setChanceChuva(resultado.clouds.all)
-            setTemperaturaMax(resultado.main.temp_max)
-            setTemperaturaMin(resultado.main.temp_min)
+            setIcone(resultado[0])
+            setTemperatura(resultado[1])
+            setTemperaturaMax(resultado[2])
+            setTemperaturaMin(resultado[3])
+            setHumidade(resultado[4])
+            setVento(resultado[5])
+            setChanceChuva(resultado[6])
             setCidade(cityName)
             return
         }
         userLocation = await requestLocation();
         if(userLocation){
             console.log("NOVA REQUISICAO")
-            const resultado = await pegarDadosClima(userLocation[0], userLocation[1])
+            const resultado = await getCurrentClimateData(userLocation[0], userLocation[1])
             cityName = await getCityName(userLocation[0], userLocation[1])
-            setIcone(resultado.weather[0].description)
-            setTemperatura(resultado.main.temp)
-            setHumidade(resultado.main.humidity)
-            setVento(resultado.wind.speed)
-            setChanceChuva(resultado.clouds.all)
-            setTemperaturaMax(resultado.main.temp_max)
-            setTemperaturaMin(resultado.main.temp_min)
+            setIcone(resultado[0])
+            setTemperatura(resultado[1])
+            setTemperaturaMax(resultado[2])
+            setTemperaturaMin(resultado[3])
+            setHumidade(resultado[4])
+            setVento(resultado[5])
+            setChanceChuva(resultado[6])
             setCidade(cityName);
             const newObject1 = { name: cityName, state: 'TAL', country: 'aquele la'}
             CITYS.push(newObject1);
+            return
         }
     }
 
