@@ -97,6 +97,12 @@ export default function TelaPrincipal() {
                 <Image source={iconSetaBaixo} style={styles.iconSeta}/>
             </TouchableOpacity>
 
+            <TouchableOpacity
+                style={styles.buttonLogout}
+            >
+                <Text style={styles.localizacao}> Sair </Text>
+            </TouchableOpacity>
+
             <Modal
                 visible={visibleModal}
                 transparent={true}

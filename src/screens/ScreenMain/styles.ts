@@ -48,4 +48,13 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold'
     },
+    buttonLogout: {
+        top: '4%',
+        flexDirection: 'row',
+        height: '4%',
+        alignSelf: 'flex-end',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginRight: '5%'
+    },
 })
