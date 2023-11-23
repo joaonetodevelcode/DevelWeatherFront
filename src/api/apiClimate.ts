@@ -5,10 +5,10 @@ const url2 = "https://pro.openweathermap.org/data/2.5/"
 const key = "9f17eff0b09150069908363188a029c6"
 
 
-export async function getCurrentClimateData(lat: number | undefined, lon: number | undefined) {
+export async function getCurrentClimateData(cityID: string | undefined) {
     const climateData: Array<any> = []
     try{
-        const response = await axios.get(`${url}weather?lat=${lat}&lon=${lon}&appid=${key}`)
+        const response = await axios.get(`${url}weather?q=${cityID}&appid=${key}`)
 
         const climate = response.data
 
@@ -30,11 +30,11 @@ export async function getCurrentClimateData(lat: number | undefined, lon: number
     }
 }
 
-export async function getTomorrowClimateData(lat: number | undefined, lon: number | undefined) {
+export async function getTomorrowClimateData(cityID: string | undefined) {
     const climateData: Array<any> = []
     
     try{
-        const response = await axios.get(`${url2}forecast/hourly?lat=${lat}&lon=${lon}&appid=${key}`)
+        const response = await axios.get(`${url2}forecast/hourly?q=${cityID}&appid=${key}`)
 
         const climate = response.data.list[20]
 

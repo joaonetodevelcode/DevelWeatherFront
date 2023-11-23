@@ -32,8 +32,6 @@ export default function TelaPrincipal({navigation}: any) {
     const [temperaturaMin, setTemperaturaMin] = useState('')
     const [climateDataTomorrow, setClimateDataTomorrow] = useState<any[]>([])
     let userLocation: number[] | undefined = []
-    let latitude: number;
-    let longitude: number;
     let cityName: string;
 
     const {logout, user}: any = useContext(AuthContext) 
@@ -42,27 +40,31 @@ export default function TelaPrincipal({navigation}: any) {
         userLocation = await requestLocation();
         if(userLocation) {
             cityName = await getCityName(userLocation[0], userLocation[1])
-            dadosClima(userLocation[0], userLocation[1], cityName)
+            dadosClima(cityName)
             insertInCitys(cityName, 'TAL')
         }
     }
 
 
-    async function dadosClima(lat: number, lng: number, cityName: string) {
-        console.log('TA ENTRANDO')
-        const resultado = await getCurrentClimateData(lat, lng)
-        const climateTomorrow = await getTomorrowClimateData(lat, lng)
-        console.log(resultado)
-        setIcone(resultado[0])
-        setTemperatura(resultado[1])
-        setTemperaturaMax(resultado[2])
-        setTemperaturaMin(resultado[3])
-        setHumidade(resultado[4])
-        setVento(resultado[5])
-        setChanceChuva(resultado[6])
-        setCidade(cityName)
-        setClimateDataTomorrow(climateTomorrow)
-        return
+    async function dadosClima(cityName?: string) {
+        if(cityName){
+            console.log(cityName)
+            let newName = cityName.replace(/,.*?,/, ',');
+            const resultado = await getCurrentClimateData(newName)
+            const climateTomorrow = await getTomorrowClimateData(newName)
+            console.log(resultado)
+            setIcone(resultado[0])
+            setTemperatura(resultado[1])
+            setTemperaturaMax(resultado[2])
+            setTemperaturaMin(resultado[3])
+            setHumidade(resultado[4])
+            setVento(resultado[5])
+            setChanceChuva(resultado[6])
+            setCidade(cityName)
+            setClimateDataTomorrow(climateTomorrow)
+            return
+        }
+        getUserLocation()
     }
 
     function handleLogout(){
@@ -71,7 +73,7 @@ export default function TelaPrincipal({navigation}: any) {
     }
     
     useEffect(() => {
-        getUserLocation()    
+        dadosClima();  
     }, []);
 
     if (!icone) return <ScreenLoading />
@@ -112,7 +114,7 @@ export default function TelaPrincipal({navigation}: any) {
                 onRequestClose={() => setVisibleModal(false)}
             >
                 <CityModal 
-                    climateData={(lat: number, lng: number, cityName: string) => dadosClima(lat, lng, cityName)}
+                    climateData={(cityName: string) => dadosClima(cityName)}
                     handleClose={() => setVisibleModal(false)}
                     userCity={cidade}
                     />

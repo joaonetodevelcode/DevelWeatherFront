@@ -6,7 +6,7 @@ import { CITYS, insertInCitys } from "../../mocks/citys";
 import PlaceAutocomplete from "../PlaceAutocomplete";
 interface CityModalInterface {
     handleClose: () => void
-    climateData: (lat: number, lng: number, cityName: string) => Promise<any>
+    climateData: (cityName: string) => Promise<any>
     userCity: string
 }
 
@@ -21,7 +21,7 @@ export default function CityModal({
     async function searchDataCity(city: string) {
         const dataCity = await getDataCityByName(city)
         if(dataCity) {
-            await climateData(dataCity[0], dataCity[1], city)
+            await climateData(city)
             handleClose();
         }
     } 
@@ -29,7 +29,7 @@ export default function CityModal({
     async function insertNewCity(newCity:string, nameCity: string, localCity: string) {
         const dataCity = await getDataCityByName(newCity)
         if(dataCity) {
-            await climateData(dataCity[0], dataCity[1], newCity);
+            await climateData(newCity);
             insertInCitys(nameCity, localCity)
             handleClose();
         }
@@ -53,7 +53,7 @@ export default function CityModal({
                     data.structured_formatting.secondary_text
                 ]
                 insertNewCity(cityData[0], cityData[1], cityData[2]);
-                console.log(cityData)
+                console.log(data)
             }}/>
             
             <FlatList
