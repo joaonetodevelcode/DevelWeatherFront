@@ -9,7 +9,7 @@ type CardProps = {
 
 export const CardCity = ({name, local, searchCity}: CardProps) => (
     <View style={styles.container}>
-        <TouchableOpacity onPress={() => searchCity(name)}>
+        <TouchableOpacity onPress={() => searchCity(`${name}, ${local}`)}>
         <Text style={styles.city}>{name}</Text>
         <Text style={styles.text}>{local}</Text>
         </TouchableOpacity>

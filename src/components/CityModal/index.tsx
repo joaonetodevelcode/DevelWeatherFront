@@ -6,7 +6,7 @@ import { CITYS, insertInCitys } from "../../mocks/citys";
 import PlaceAutocomplete from "../PlaceAutocomplete";
 interface CityModalInterface {
     handleClose: () => void
-    climateData: (lat: number, lng: number) => Promise<any>
+    climateData: (lat: number, lng: number, cityName: string) => Promise<any>
     userCity: string
 }
 
@@ -21,7 +21,7 @@ export default function CityModal({
     async function searchDataCity(city: string) {
         const dataCity = await getDataCityByName(city)
         if(dataCity) {
-            await climateData(dataCity[0], dataCity[1])
+            await climateData(dataCity[0], dataCity[1], city)
             handleClose();
         }
     } 
@@ -29,7 +29,7 @@ export default function CityModal({
     async function insertNewCity(newCity:string, nameCity: string, localCity: string) {
         const dataCity = await getDataCityByName(newCity)
         if(dataCity) {
-            await climateData(dataCity[0], dataCity[1]);
+            await climateData(dataCity[0], dataCity[1], newCity);
             insertInCitys(nameCity, localCity)
             handleClose();
         }
@@ -62,7 +62,7 @@ export default function CityModal({
                 <CardCity 
                     name={item.name} 
                     local={item.local} 
-                    searchCity={() => searchDataCity(item.name)}
+                    searchCity={() => searchDataCity(`${item.name}, ${item.local}`)}
                     />}
                 keyExtractor={item => item.name}
                 style={styles.list}
