@@ -1,15 +1,14 @@
 interface City {
     name: string
-    state: string
-    country: string
+    local: string
 }
 
 export const CITYS: City[] = [];
 
-export function insertInCitys(newCity: string) {
-    const exist = CITYS.find(city => city.name === newCity)
+export function insertInCitys(nameCity: string, localCity: string, ) {
+    const exist = CITYS.find(city => city.name === nameCity)
     if(!exist) {
-        const newObject1 = { name: newCity, state: 'TAL', country: 'aquele la'}
+        const newObject1 = { name: nameCity, local: localCity}
         CITYS.push(newObject1);
     }
 }

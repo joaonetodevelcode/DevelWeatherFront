@@ -26,12 +26,11 @@ export default function CityModal({
         }
     } 
 
-    async function insertNewCity(newCity:string) {
+    async function insertNewCity(newCity:string, nameCity: string, localCity: string) {
         const dataCity = await getDataCityByName(newCity)
         if(dataCity) {
             await climateData(dataCity[0], dataCity[1]);
-            const nameCity = await getCityName(dataCity[0], dataCity[1]);
-            insertInCitys(nameCity)
+            insertInCitys(nameCity, localCity)
             handleClose();
         }
     }
@@ -53,7 +52,7 @@ export default function CityModal({
                     data.structured_formatting.main_text,
                     data.structured_formatting.secondary_text
                 ]
-                insertNewCity(cityData[0]);
+                insertNewCity(cityData[0], cityData[1], cityData[2]);
                 console.log(cityData)
             }}/>
             
@@ -62,8 +61,7 @@ export default function CityModal({
                 renderItem={({item}) => 
                 <CardCity 
                     name={item.name} 
-                    state={item.state} 
-                    country={item.country} 
+                    local={item.local} 
                     searchCity={() => searchDataCity(item.name)}
                     />}
                 keyExtractor={item => item.name}

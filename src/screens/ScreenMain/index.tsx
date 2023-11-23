@@ -59,7 +59,7 @@ export default function TelaPrincipal({navigation}: any) {
         }
         userLocation = await requestLocation();
         if(userLocation){
-            console.log("NOVA REQUISICAO")
+            console.log(userLocation)
             const resultado = await getCurrentClimateData(userLocation[0], userLocation[1])
             const climateTomorrow = await getTomorrowClimateData(userLocation[0], userLocation[1])
             cityName = await getCityName(userLocation[0], userLocation[1])
@@ -72,7 +72,7 @@ export default function TelaPrincipal({navigation}: any) {
             setChanceChuva(resultado[6])
             setClimateDataTomorrow(climateTomorrow)
             setCidade(cityName);
-            insertInCitys(cityName)
+            insertInCitys(cityName, 'TAL')
             return
         }
     }
