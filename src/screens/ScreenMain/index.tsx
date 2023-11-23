@@ -38,43 +38,31 @@ export default function TelaPrincipal({navigation}: any) {
 
     const {logout, user}: any = useContext(AuthContext) 
 
-
-    async function dadosClima(lat: number, lng: number) {
-        if(lat) {
-            console.log('TA ENTRANDO')
-            const resultado = await getCurrentClimateData(lat, lng)
-            const climateTomorrow = await getTomorrowClimateData(lat, lng)
-            const cityName = await getCityName(lat, lng)
-            console.log(resultado)
-            setIcone(resultado[0])
-            setTemperatura(resultado[1])
-            setTemperaturaMax(resultado[2])
-            setTemperaturaMin(resultado[3])
-            setHumidade(resultado[4])
-            setVento(resultado[5])
-            setChanceChuva(resultado[6])
-            setCidade(cityName)
-            setClimateDataTomorrow(climateTomorrow)
-            return
-        }
+    async function getUserLocation() {
         userLocation = await requestLocation();
-        if(userLocation){
-            console.log(userLocation)
-            const resultado = await getCurrentClimateData(userLocation[0], userLocation[1])
-            const climateTomorrow = await getTomorrowClimateData(userLocation[0], userLocation[1])
+        if(userLocation) {
             cityName = await getCityName(userLocation[0], userLocation[1])
-            setIcone(resultado[0])
-            setTemperatura(resultado[1])
-            setTemperaturaMax(resultado[2])
-            setTemperaturaMin(resultado[3])
-            setHumidade(resultado[4])
-            setVento(resultado[5])
-            setChanceChuva(resultado[6])
-            setClimateDataTomorrow(climateTomorrow)
-            setCidade(cityName);
+            dadosClima(userLocation[0], userLocation[1], cityName)
             insertInCitys(cityName, 'TAL')
-            return
         }
+    }
+
+
+    async function dadosClima(lat: number, lng: number, cityName: string) {
+        console.log('TA ENTRANDO')
+        const resultado = await getCurrentClimateData(lat, lng)
+        const climateTomorrow = await getTomorrowClimateData(lat, lng)
+        console.log(resultado)
+        setIcone(resultado[0])
+        setTemperatura(resultado[1])
+        setTemperaturaMax(resultado[2])
+        setTemperaturaMin(resultado[3])
+        setHumidade(resultado[4])
+        setVento(resultado[5])
+        setChanceChuva(resultado[6])
+        setCidade(cityName)
+        setClimateDataTomorrow(climateTomorrow)
+        return
     }
 
     function handleLogout(){
@@ -83,7 +71,7 @@ export default function TelaPrincipal({navigation}: any) {
     }
     
     useEffect(() => {
-            dadosClima(latitude, longitude)
+        getUserLocation()    
     }, []);
 
     if (!icone) return <ScreenLoading />
@@ -124,7 +112,7 @@ export default function TelaPrincipal({navigation}: any) {
                 onRequestClose={() => setVisibleModal(false)}
             >
                 <CityModal 
-                    climateData={(lat: number, lng: number) => dadosClima(lat, lng)}
+                    climateData={(lat: number, lng: number, cityName: string) => dadosClima(lat, lng, cityName)}
                     handleClose={() => setVisibleModal(false)}
                     userCity={cidade}
                     />
