@@ -3,6 +3,7 @@ import { FlatList, View, StyleSheet, Text, TouchableOpacity, TextInput, ScrollVi
 import { getCityName, getDataCityByName } from "../../api/apiGoogleMaps";
 import { CardCity } from "../CardCity/idex";
 import { CITYS, insertInCitys } from "../../mocks/citys";
+import PlaceAutocomplete from "../PlaceAutocomplete";
 interface CityModalInterface {
     handleClose: () => void
     climateData: (lat: number, lng: number) => Promise<any>
@@ -13,7 +14,7 @@ interface CityModalInterface {
 export default function CityModal({
     handleClose,
     climateData,
-    userCity
+    userCity,
 }: CityModalInterface) {
     const [newCity, setNewCity] = useState('')   
 
@@ -46,21 +47,16 @@ export default function CityModal({
     return( 
     <View style={styles.container}>
         <View style={styles.content}>
-            <View style={styles.search}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Adicione uma Cidade"
-                    value={newCity}
-                    onChangeText={setNewCity}
-                />
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => insertNewCity(newCity)}
-                >
-                    <Text>Adicionar</Text>
-                </TouchableOpacity>
-            </View>
-
+            
+            <PlaceAutocomplete onPress={(data) => {
+                const cityData = [data.description,
+                    data.structured_formatting.main_text,
+                    data.structured_formatting.secondary_text
+                ]
+                insertNewCity(cityData[0]);
+                console.log(cityData)
+            }}/>
+            
             <FlatList
                 data={CITYS}
                 renderItem={({item}) => 
@@ -76,7 +72,7 @@ export default function CityModal({
             
         </View>
 
-        <TouchableOpacity style={{ height: '60%', width: '100%' }} onPress={handleClose}></TouchableOpacity>   
+        <TouchableOpacity style={{ height: '60%', width: '100%'}} onPress={handleClose}></TouchableOpacity>   
         
     </View>
 )}
@@ -93,13 +89,6 @@ const styles = StyleSheet.create({
         width: '95%',
         borderRadius: 20
     },
-    search: {
-        justifyContent: 'center',
-        height: 40,
-        width: '95%',
-        flexDirection: 'row',
-        marginTop: 5
-    },
     input: {
         borderColor: '#000',
         borderWidth: 1.5,
@@ -114,11 +103,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 20,
-        backgroundColor: '#696969',
+        backgroundColor: '#D1D1D1',
         width: '30%',
-        height: 40
+        height: 40,
+        marginLeft: '70%',
+        marginTop: '1.5%'
     },
     list: {
-        width: '100%'
+        width: '100%',
+        marginTop: 45
     }
 })
