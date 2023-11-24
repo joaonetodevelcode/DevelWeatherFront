@@ -1,5 +1,6 @@
 import axios from "axios";
 import urlDatabase from "../api/apiDatabase";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export async function userLogin(email: string, password: string) {
     
@@ -9,7 +10,9 @@ export async function userLogin(email: string, password: string) {
                 password: password
             }
           );
-
+          const user = `${response.data.user.email}, ${response.data.user.password}`
+          await AsyncStorage.setItem("user", user)           
+          
           return response.data
           
         } catch (error) {
