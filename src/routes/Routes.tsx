@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import ScreenLogin from '../screens/ScreenLogin';
 import ScreenRegister from '../screens/ScreenRegister';
 import ScreenMain from '../screens/ScreenMain';
+import AutomaticLogin from '../screens/AutomaticLogin';
 
 const Stack = createStackNavigator();
 
@@ -11,6 +12,10 @@ export default function Routes() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
+                <Stack.Screen 
+                    name="AutomaticLogin" 
+                    component={AutomaticLogin} 
+                    options={{ headerShown: false }}/>
                 <Stack.Screen 
                     name="Login" 
                     component={ScreenLogin} 
