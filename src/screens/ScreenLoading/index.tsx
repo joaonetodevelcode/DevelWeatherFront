@@ -18,6 +18,7 @@ export default function ScreenLoading() {
             <LottieView source={loading}
                 autoPlay={true}
                 loop={true}
+                style={styles.content}
             />
             
         </LinearGradient> 
@@ -29,4 +30,7 @@ export const styles = StyleSheet.create({
         flex:1 ,
         alignItems: 'center',
     },
+    content: {
+        marginBottom: '15%'
+    }
 })

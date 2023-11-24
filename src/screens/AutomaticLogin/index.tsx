@@ -46,6 +46,7 @@ export default function AutomaticLogin({navigation}: any) {
             <LottieView source={loading}
                 autoPlay={true}
                 loop={true}
+                style={styles.content}
             />
             
         </LinearGradient> 
@@ -57,4 +58,7 @@ export const styles = StyleSheet.create({
         flex:1 ,
         alignItems: 'center',
     },
+    content: {
+        marginBottom: '15%'
+    }
 })
