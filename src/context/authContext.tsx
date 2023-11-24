@@ -1,5 +1,6 @@
 import React, { ReactNode, createContext, useState } from "react";
 import { userLogin } from "../service/authService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type AuthProviderProps = {
   children?: ReactNode | undefined;
@@ -26,8 +27,9 @@ export function AuthProvider ({children}: AuthProviderProps) {
       }
     }
 
-    function logout() {
+    async function logout() {
       setUser({})
+      await AsyncStorage.setItem('user', '')
     }
 
     const value = {login, logout, user}
