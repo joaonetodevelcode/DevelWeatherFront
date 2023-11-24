@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
-import { Text, Modal, TouchableOpacity, Image } from 'react-native';
+import { Text, Modal, TouchableOpacity, Image, BackHandler } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from './styles';
 
@@ -18,6 +18,7 @@ import { getCityName } from '../../api/apiGoogleMaps';
 import CityModal from '../../components/CityModal';
 import { insertInCitys } from '../../mocks/citys';
 import { AuthContext } from '../../context/authContext';
+import {useBackHandler} from '@react-native-community/hooks'
 
 export default function TelaPrincipal({navigation}: any) {
     const [visibleModal, setVisibleModal] = useState(false) 
@@ -75,6 +76,11 @@ export default function TelaPrincipal({navigation}: any) {
     useEffect(() => {
         dadosClima();  
     }, []);
+
+    useBackHandler(() => {
+        BackHandler.exitApp()
+        return true
+    })
 
     if (!icone) return <ScreenLoading />
     
