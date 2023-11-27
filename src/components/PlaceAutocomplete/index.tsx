@@ -17,8 +17,8 @@ function PlaceAutocomplete({onPress}: PlaceAutocompleteInterface) {
           query={{
             key: 'AIzaSyDHNR1fqjETF0dodsgE1dlMV1F-WFjbTx4',
             language: 'pt-BR',
+            type: '(cities)'
           }}
-          minLength={4}
           styles={{
             textInput: {
               borderRadius: 20,
