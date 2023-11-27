@@ -41,16 +41,16 @@ export default function TelaPrincipal({navigation}: any) {
         userLocation = await requestLocation();
         if(userLocation) {
             cityName = await getCityName(userLocation[0], userLocation[1])
-            dadosClima(cityName)
-            insertInCitys(cityName, 'TAL')
+            dadosClima(cityName, cityName)
+            insertInCitys(cityName, "Localização atual")
         }
     }
 
 
-    async function dadosClima(cityName?: string) {
-        if(cityName){
-            console.log(cityName)
-            let newName = cityName.replace(/,.*?,/, ',');
+    async function dadosClima(dataCity: string, cityName: string) {
+        if(dataCity){
+            console.log(dataCity)
+            let newName = dataCity.replace(/,.*?,/, ',');
             const resultado = await getCurrentClimateData(newName)
             const climateTomorrow = await getTomorrowClimateData(newName)
             console.log(resultado)
@@ -74,7 +74,7 @@ export default function TelaPrincipal({navigation}: any) {
     }
     
     useEffect(() => {
-        dadosClima();  
+        getUserLocation();  
     }, []);
 
     useBackHandler(() => {
@@ -133,7 +133,7 @@ export default function TelaPrincipal({navigation}: any) {
                         onRequestClose={() => setVisibleModal(false)}
                     >
                         <CityModal 
-                            climateData={(cityName: string) => dadosClima(cityName)}
+                            climateData={(dataCity: string ,cityName: string) => dadosClima(dataCity, cityName)}
                             handleClose={() => setVisibleModal(false)}
                             userCity={cidade}
                             />

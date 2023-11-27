@@ -7,7 +7,7 @@ import PlaceAutocomplete from "../PlaceAutocomplete";
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 interface CityModalInterface {
     handleClose: () => void
-    climateData: (cityName: string) => Promise<any>
+    climateData: (dataCity: string ,cityName: string) => Promise<any>
     userCity: string
 }
 
@@ -17,12 +17,11 @@ export default function CityModal({
     climateData,
     userCity,
 }: CityModalInterface) {
-    const [newCity, setNewCity] = useState('')   
-
-    async function searchDataCity(city: string) {
+    
+    async function searchDataCity(city: string, nameCity: string) {
         const dataCity = await getDataCityByName(city)
         if(dataCity) {
-            await climateData(city)
+            await climateData(city, nameCity)
             handleClose();
         }
     } 
@@ -30,7 +29,7 @@ export default function CityModal({
     async function insertNewCity(newCity:string, nameCity: string, localCity: string) {
         const dataCity = await getDataCityByName(newCity)
         if(dataCity) {
-            await climateData(newCity);
+            await climateData(newCity, nameCity);
             insertInCitys(nameCity, localCity)
             handleClose();
         }
@@ -63,7 +62,7 @@ export default function CityModal({
                 <CardCity 
                     name={item.name} 
                     local={item.local} 
-                    searchCity={() => searchDataCity(`${item.name}, ${item.local}`)}
+                    searchCity={() => searchDataCity(`${item.name}, ${item.local}`, item.name)}
                     />}
                 keyExtractor={item => item.name}
                 style={styles.list}
