@@ -41,13 +41,12 @@ export default function CardInformation({
 
 const styles = StyleSheet.create({
     container: {
-        height: '5%',
-        width: '90%',
+        width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         borderRadius: 20,
-        padding: 15
+        padding: 10
         
     },
     texto: {

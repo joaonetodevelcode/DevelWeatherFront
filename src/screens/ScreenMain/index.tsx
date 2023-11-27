@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
-import { Text, Modal, TouchableOpacity, Image, BackHandler } from 'react-native';
+import { Text, Modal, TouchableOpacity, Image, BackHandler, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from './styles';
 
@@ -90,73 +90,76 @@ export default function TelaPrincipal({navigation}: any) {
         colors={climates[`${icone}`].cor}
         start={{ x: 0, y: 0 }} // Ponto de início (canto superior esquerdo)
         end={{ x: 1, y: 1 }}   // Ponto de fim (canto superior direito)
-        style={styles.container}
-        >
-            <LottieView source={climates[`${icone}`].dinamico}
-                autoPlay={true}
-                loop={true}
-                style={styles.icone}
-            />
-           
-            <TouchableOpacity
-                style={styles.botaoModal}
-                onPress={() => setVisibleModal(true)}
-            >
-                <Image source={iconLocation} style={styles.iconLocalizacao}/>
-                <Text style={styles.localizacao}> {cidade} </Text>
-                <Image source={iconSetaBaixo} style={styles.iconSeta}/>
-            </TouchableOpacity>
+        style={styles.linearGradient}
+        >   
+            
+                <View style={styles.contentModal}>
+                    <TouchableOpacity
+                        style={styles.botaoModal}
+                        onPress={() => setVisibleModal(true)}
+                    >
+                        <Image source={iconLocation} style={styles.iconLocalizacao}/>
+                        <Text style={styles.localizacao}> {cidade} </Text>
+                        <Image source={iconSetaBaixo} style={styles.iconSeta}/>
+                    </TouchableOpacity>
 
-            <TouchableOpacity
-                style={styles.buttonLogout}
-                onPress={() => handleLogout()}
-            >
-                <Text style={styles.localizacao}> Sair </Text>
-            </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => handleLogout()}
+                    >
+                        <Text style={styles.localizacao}> Sair </Text>
+                    </TouchableOpacity>
+                </View>
 
-            <Modal
-                visible={visibleModal}
-                transparent={true}
-                onRequestClose={() => setVisibleModal(false)}
-            >
-                <CityModal 
-                    climateData={(cityName: string) => dadosClima(cityName)}
-                    handleClose={() => setVisibleModal(false)}
-                    userCity={cidade}
+                <View style={styles.contentInfos}>
+
+                    <View style={{width: 200, height: 200}}>
+                        <LottieView source={climates[`${icone}`].dinamico}
+                            autoPlay={true}
+                            loop={true}
+                        />
+                    </View>
+                    
+                    
+
+                    <Text style={styles.texto}>{temperatureConversion(temperatura)}°C</Text>
+
+                    <Text style={styles.textoPrevisao}>{icone}</Text>
+
+                    <Text style={styles.textoMeio}>Max.: {temperatureConversion(temperaturaMax)}°C   Min.: {temperatureConversion(temperaturaMin)}°C</Text>
+
+                    <Modal
+                        visible={visibleModal}
+                        transparent={true}
+                        onRequestClose={() => setVisibleModal(false)}
+                    >
+                        <CityModal 
+                            climateData={(cityName: string) => dadosClima(cityName)}
+                            handleClose={() => setVisibleModal(false)}
+                            userCity={cidade}
+                            />
+                    </Modal>
+                
+                    <CardInformation 
+                        chanceChuva={chanceChuva}
+                        humidade={humidade}
+                        vento={vento}
+                        color={climates[`${icone}`].background}
                     />
-            </Modal>
 
-
-            <Text style={styles.texto}>{temperatureConversion(temperatura)}°C</Text>
-
-            <Text style={styles.textoPrevisao}>{icone}</Text>
-
-            <Text style={styles.textoMeio}>Max.: {temperatureConversion(temperaturaMax)}°C   Min.: {temperatureConversion(temperaturaMin)}°C</Text>
-           
-            <CardInformation 
-                chanceChuva={chanceChuva}
-                humidade={humidade}
-                vento={vento}
-                color={climates[`${icone}`].background}
-            />
-
-            <CardTomorrow 
-                climate={climateDataTomorrow[0]}
-                temperatureMax={climateDataTomorrow[2]}
-                temperatureMin={climateDataTomorrow[3]}
-                humidity={climateDataTomorrow[4]}
-                wind={climateDataTomorrow[5]}
-                clouds={climateDataTomorrow[6]}
-                color={climates[`${icone}`].background}
-                icon={climates[`${icone}`].estatico}
-            />
+                    <CardTomorrow 
+                        climate={climateDataTomorrow[0]}
+                        temperatureMax={climateDataTomorrow[2]}
+                        temperatureMin={climateDataTomorrow[3]}
+                        humidity={climateDataTomorrow[4]}
+                        wind={climateDataTomorrow[5]}
+                        clouds={climateDataTomorrow[6]}
+                        color={climates[`${icone}`].background}
+                        icon={climates[`${icone}`].estatico}
+                    />
+                </View>
             
         </LinearGradient> 
 
         
     )
 }
-
-//openmap
-
-//snow, broken clouds

@@ -64,10 +64,9 @@ export default function CardTomorrow({
 
 const styles = StyleSheet.create({
     container: {
-        height: '25%',
-        width: '90%',
+        width: '100%',
         borderRadius: 20,
-        padding: 15,
+        padding: 10,
         marginTop: 20,
         justifyContent: 'space-between'
         
@@ -78,11 +77,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15
     },
     containerInfos: {
-        height: '20%',
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',        
+        alignItems: 'center',    
+        marginTop: 30    
     },
     titulo: {
         color: '#fff',

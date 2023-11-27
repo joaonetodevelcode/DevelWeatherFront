@@ -1,39 +1,47 @@
-
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 export const styles = StyleSheet.create({
-    container: {
+    linearGradient: {
         flex:1 ,
         alignItems: 'center',
+        paddingHorizontal: 15,
+        paddingTop: Platform.OS === 'android'? 44 : getStatusBarHeight() + 16
     },
-    icone: {
-        top: '-20%',
-        
+    contentModal: {
+        marginTop: 20,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    botaoModal: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    contentInfos: {
+        height: "75%",
+        width: '100%',
+        marginTop: 50,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     texto: {
-        marginTop: '90%',
         fontSize: 72,
         color: '#fff',
-        fontWeight: 'bold'
-    },
-    textoMeio: {
-        color: '#fff',
-        fontSize: 18,
-        marginBottom: '5%'
+        fontWeight: 'bold',
+        marginBottom: 10
     },
     textoPrevisao: {
         color: '#fff',
         fontSize: 18,
-        marginTop: '5%'
+        marginBottom: 5,
+       
     },
-    botaoModal: {
-        top: '12%',
-        flexDirection: 'row',
-        height: '4%',
-        alignSelf: 'flex-start',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginLeft: '5%',
+    textoMeio: {
+        color: '#fff',
+        fontSize: 18,
+        marginBottom: 30
     },
     iconLocalizacao: {
       width: 25,
@@ -48,13 +56,5 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold'
     },
-    buttonLogout: {
-        top: '4%',
-        flexDirection: 'row',
-        height: '4%',
-        alignSelf: 'flex-end',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginRight: '5%'
-    },
+    
 })
