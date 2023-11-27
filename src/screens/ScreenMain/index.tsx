@@ -48,6 +48,7 @@ export default function TelaPrincipal({navigation}: any) {
 
 
     async function dadosClima(dataCity: string, cityName: string) {
+        setIcone(null)
         if(dataCity){
             console.log(dataCity)
             let newName = dataCity.replace(/,.*?,/, ',');
@@ -112,7 +113,7 @@ export default function TelaPrincipal({navigation}: any) {
 
                 <View style={styles.contentInfos}>
 
-                    <View style={{width: 200, height: 200}}>
+                    <View style={{width: 300, height: 250}}>
                         <LottieView source={climates[`${icone}`].dinamico}
                             autoPlay={true}
                             loop={true}
