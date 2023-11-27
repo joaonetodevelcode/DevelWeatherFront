@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import { FlatList, View, StyleSheet, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import React, { useState } from "react";
+import { FlatList, View, StyleSheet, Text, TouchableOpacity, Platform } from 'react-native';
 import { getCityName, getDataCityByName } from "../../api/apiGoogleMaps";
 import { CardCity } from "../CardCity/idex";
 import { CITYS, insertInCitys } from "../../mocks/citys";
 import PlaceAutocomplete from "../PlaceAutocomplete";
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 interface CityModalInterface {
     handleClose: () => void
     climateData: (cityName: string) => Promise<any>
@@ -69,8 +70,8 @@ export default function CityModal({
             />
             
         </View>
-
-        <TouchableOpacity style={{ height: '60%', width: '100%'}} onPress={handleClose}></TouchableOpacity>   
+        
+        <TouchableOpacity style={{ width: '100%', height: '100%'}} onPress={handleClose}></TouchableOpacity>   
         
     </View>
 )}
@@ -78,12 +79,13 @@ export default function CityModal({
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        flex: 1
+        flex: 1,
+        paddingTop: Platform.OS === 'android'? 0 : getStatusBarHeight() + 20
     },
     content: {
         backgroundColor: '#fff',
         alignItems: 'center',
-        height: '40%',
+        height: 350,
         width: '95%',
         borderRadius: 20
     },
@@ -96,16 +98,6 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 20,
         paddingLeft: 20,
-    },
-    button: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 20,
-        backgroundColor: '#D1D1D1',
-        width: '30%',
-        height: 40,
-        marginLeft: '70%',
-        marginTop: '1.5%'
     },
     list: {
         width: '100%',
