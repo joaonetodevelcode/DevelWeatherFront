@@ -31,6 +31,6 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     content: {
-        marginBottom: '15%'
+        marginBottom: 70 
     }
 })
