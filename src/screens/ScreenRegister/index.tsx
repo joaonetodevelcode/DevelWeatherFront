@@ -6,7 +6,7 @@ import { styles } from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
 import { userRegister } from '../../service/registerService';
 
-export default function TelaCadastro({navigation}: any) {
+export default function ScreenRegister({navigation}: any) {
     const [name, setName] = useState('');
     const [cel, setCel] = useState('');
     const [email, setEmail] = useState('');
@@ -27,7 +27,7 @@ export default function TelaCadastro({navigation}: any) {
         colors={['#08244F', '#134CB5', '#0B42AB']}
         start={{ x: 0, y: 0 }} // Ponto de início (canto superior esquerdo)
         end={{ x: 1, y: 1 }}   // Ponto de fim (canto superior direito)
-        style={styles.background}
+        style={styles.container}
         >
         <Text style={styles.titulo}>Faça seu cadastro</Text>
         <View style={styles.containerInput}>

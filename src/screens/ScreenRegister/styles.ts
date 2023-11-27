@@ -5,34 +5,27 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#9BD1E5',
         alignItems: 'center',
         justifyContent: 'center'
     },
     titulo: {
         fontSize: 22,
-        marginBottom: '10%',
+        marginBottom: 30,
         color: '#fff'
     },
     containerInput: {
-        height: '30%',
         width: '90%',
         justifyContent: 'space-between',
         marginBottom: 30
     },
     containerCadastro: {
         flexDirection: 'row',
-        height: '10%',
         justifyContent: 'space-between',
         alignItems: 'center',
+        marginTop: 20
     },
     texto: {
-        marginLeft: 5,
+        marginLeft: 10,
         color: '#fff'
-    },
-    background: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
     },
 })
