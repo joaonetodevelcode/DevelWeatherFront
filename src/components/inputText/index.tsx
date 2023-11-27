@@ -37,5 +37,6 @@ interface InputProps {
       height: 50,
       borderRadius: 20,
       paddingLeft: 20,
+      marginVertical: 10
   },
   })

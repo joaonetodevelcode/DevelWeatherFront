@@ -31,9 +31,10 @@ export default function ScreenLogin({navigation}: any) {
         colors={['#08244F', '#134CB5', '#0B42AB']}
         start={{ x: 0, y: 0 }} // Ponto de início (canto superior esquerdo)
         end={{ x: 1, y: 1 }}   // Ponto de fim (canto superior direito)
-        style={styles.background}
+        style={styles.container}
         >
-        <Text style={styles.titulo}>Seja Bem Vindo!!!</Text>
+        <Text style={{fontSize: 40, color: "#fff", marginBottom: 5}}>DevelWeather</Text>
+        <Text style={styles.titulo}>Seja Bem Vindo!</Text>
         <View style={styles.containerInput}>
             <InputText 
                 placeholder='Digite seu email'
@@ -50,10 +51,6 @@ export default function ScreenLogin({navigation}: any) {
         <Button valor="Entrar" onPress={() => handleLogin()}/>
 
         <View style={styles.containerCadastro}>
-            <TouchableOpacity onPress={() => requestLocation()}>
-                <Text>Esqueceu a senha?</Text>
-            </TouchableOpacity>
-            <Text style={{color: '#fff'}}>Ou</Text>
             <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                 <Text>Faça seu Cadastro</Text>
             </TouchableOpacity>
