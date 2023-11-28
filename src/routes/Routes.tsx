@@ -15,11 +15,13 @@ export default function Routes() {
                 <Stack.Screen 
                     name="AutomaticLogin" 
                     component={AutomaticLogin} 
-                    options={{ headerShown: false }}/>
+                    options={{ headerShown: false,
+                        gestureEnabled: false }}/>
                 <Stack.Screen 
                     name="Login" 
                     component={ScreenLogin} 
-                    options={{ headerShown: false }}/>
+                    options={{ headerShown: false,
+                        gestureEnabled: false }}/>
                 <Stack.Screen 
                     name="Register" 
                     component={ScreenRegister} 
@@ -27,7 +29,8 @@ export default function Routes() {
                 <Stack.Screen 
                     name="Main" 
                     component={ScreenMain} 
-                    options={{ headerShown: false }}/>
+                    options={{ headerShown: false,
+                        gestureEnabled: false}}/>
             </Stack.Navigator>
         </NavigationContainer>
     )
