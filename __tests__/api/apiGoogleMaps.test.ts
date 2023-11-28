@@ -1,4 +1,4 @@
-import { getCityName } from "../../src/api/apiGoogleMaps";
+import { getCityName, getDataCityByName } from "../../src/api/apiGoogleMaps";
 import axios from "axios";
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -39,6 +39,44 @@ describe("../../src/api/apiGoogleMaps", () => {
             mockedAxios.get.mockRejectedValueOnce('Requisição falhou');
 
             const response = await getCityName(latitude, longitude);
+
+            expect(response).toBe('Requisição falhou')
+            expect(mockedAxios.get).toHaveBeenCalledTimes(1);
+        });
+
+    });
+
+    describe("getDataCityByName", () => {
+
+        let cityName: string;
+
+        const mockCity = {
+            data: {
+                results: [{
+                    geometry: {
+                        location: {
+                            lat: 200,
+                            lng: 200
+                        }
+                    }
+                }]
+            }
+        }
+        const mockResponse = [200, 200]
+
+        it("Should return latitude and longitude of the city", async () => {
+            mockedAxios.get.mockResolvedValueOnce(mockCity);
+
+            const response = await getDataCityByName(cityName);
+
+            expect(response).toEqual(mockResponse)
+            expect(mockedAxios.get).toHaveBeenCalledTimes(1);
+        });
+
+        it("Should return a message when requisition fails", async () => {
+            mockedAxios.get.mockRejectedValueOnce('Requisição falhou');
+
+            const response = await getDataCityByName(cityName);
 
             expect(response).toBe('Requisição falhou')
             expect(mockedAxios.get).toHaveBeenCalledTimes(1);
