@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FlatList, View, StyleSheet, Text, TouchableOpacity, Platform } from 'react-native';
-import { getCityName, getDataCityByName } from "../../api/apiGoogleMaps";
 import { CardCity } from "../CardCity/idex";
 import { CITYS, insertInCitys } from "../../mocks/citys";
 import PlaceAutocomplete from "../PlaceAutocomplete";
@@ -19,20 +18,14 @@ export default function CityModal({
 }: CityModalInterface) {
     
     async function searchDataCity(city: string, nameCity: string) {
-        const dataCity = await getDataCityByName(city)
-        if(dataCity) {
-            await climateData(city, nameCity)
-            handleClose();
-        }
+        await climateData(city, nameCity)
+        handleClose();
     } 
 
     async function insertNewCity(newCity:string, nameCity: string, localCity: string) {
-        const dataCity = await getDataCityByName(newCity)
-        if(dataCity) {
-            await climateData(newCity, nameCity);
-            insertInCitys(nameCity, localCity)
-            handleClose();
-        }
+        await climateData(newCity, nameCity);
+        insertInCitys(nameCity, localCity)
+        handleClose();
     }
 
     if (!userCity){ 
@@ -53,7 +46,6 @@ export default function CityModal({
                     data.structured_formatting.secondary_text
                 ]
                 insertNewCity(cityData[0], cityData[1], cityData[2]);
-                console.log(data)
             }}/>
             
             <FlatList
