@@ -4,7 +4,7 @@ import { InputText } from '../../src/components/inputText';
 
 describe("../../src/components/inputText", () => {
 
-    test('deve chamar a função onChangeText corretamente', () => {
+    test('Should call the onChangeText function and set de value correctly', () => {
         
         const onChangeTextMock = jest.fn();
 
