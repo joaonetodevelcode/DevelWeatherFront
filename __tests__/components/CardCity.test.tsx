@@ -5,7 +5,7 @@ import { CardCity } from '../../src/components/CardCity/idex';
 
 describe("../../src/components/CityModal", () => {
 
-    const searchCity = jest.fn(() => new Promise(resolve => resolve("qualquer coisa")));
+    const searchCity = jest.fn(() => new Promise(() => {}));
 
     const mockInformation = {
         name: "cityName",
