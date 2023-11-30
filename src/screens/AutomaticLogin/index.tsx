@@ -17,17 +17,20 @@ export default function AutomaticLogin({navigation}: any) {
             const userData = user.match(regex);
             if(userData){
                 const response = await login(userData[1], userData[2]);
+                console.log(response)
                 if(response === "Login feito com sucesso") {
                     navigation.navigate('Main')
-                } else {
-                    console.log('tela auto login')
+                    return
+                } 
+                else {
                     navigation.navigate('Login')
+                    return
                 }
             }
+        } else {
+            navigation.navigate('Login')
             return
-        } 
-
-        navigation.navigate('Login')
+        }
     
     }
 
