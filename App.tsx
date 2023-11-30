@@ -1,3 +1,4 @@
+import 'expo-dev-client';
 import Routes from './src/routes/Routes';
 import { AuthProvider } from './src/context/authContext';
 
