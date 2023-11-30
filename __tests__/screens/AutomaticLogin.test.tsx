@@ -3,7 +3,7 @@ import { render, act } from '@testing-library/react-native';
 import AutomaticLogin from '../../src/screens/AutomaticLogin';
 import { AuthProvider } from '../../src/context/authContext';
 
-describe('AutoLoginScreen', () => {
+describe('../../src/screens/AutomaticLogin', () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
