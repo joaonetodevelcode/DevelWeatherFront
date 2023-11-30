@@ -20,10 +20,9 @@ import { insertInCitys } from '../../mocks/citys';
 import { AuthContext } from '../../context/authContext';
 import {useBackHandler} from '@react-native-community/hooks'
 
-export default function TelaPrincipal({navigation}: any) {
+export default function ScreenMain({navigation}: any) {
     const [visibleModal, setVisibleModal] = useState(false) 
     const [cidade, setCidade] = useState('')
-    const clima = "mist"
     const [icone, setIcone] = useState(null)
     const [temperatura, setTemperatura] = useState('')
     const [humidade, setHumidade] = useState('')
@@ -35,7 +34,7 @@ export default function TelaPrincipal({navigation}: any) {
     let userLocation: number[] | undefined = []
     let cityName: string;
 
-    const {logout, user}: any = useContext(AuthContext) 
+    const {logout}: any = useContext(AuthContext) 
 
     async function getUserLocation() {
         userLocation = await requestLocation();
@@ -50,11 +49,9 @@ export default function TelaPrincipal({navigation}: any) {
     async function dadosClima(dataCity: string, cityName: string) {
         setIcone(null)
         if(dataCity){
-            console.log(dataCity)
             let newName = dataCity.replace(/,.*?,/, ',');
             const resultado = await getCurrentClimateData(newName)
             const climateTomorrow = await getTomorrowClimateData(newName)
-            console.log(resultado)
             setIcone(resultado[0])
             setTemperatura(resultado[1])
             setTemperaturaMax(resultado[2])
@@ -66,7 +63,6 @@ export default function TelaPrincipal({navigation}: any) {
             setClimateDataTomorrow(climateTomorrow)
             return
         }
-        getUserLocation()
     }
 
     function handleLogout(){
