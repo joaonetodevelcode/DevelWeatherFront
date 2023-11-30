@@ -13,7 +13,7 @@ O DevelWetaher tem como principal função permitir que o usuário tenha informa
 - Você terá que utilizar o Expo Go para testar a aplicação. Para isso poderá instalar tanto em seu celular com o link https://expo.dev/client, ou utilizar o Android estudio seguindo os passos do tópico "Ambiente de desenvolvimento Android" no link : https://reactnative.dev/docs/environment-setup?guide=native
 
 
-- É necessário que siga os passos da instalação da API responsável pelo login e cadastro de usuários. Para isso você pode seguir o link: https://github.com/joaonetodevelcode/DevelWeatherBack/tree/development
+- É necessário que siga os passos da instalação da API responsável pelo login e cadastro de usuários. Para isso você pode seguir o link: https://github.com/joaonetodevelcode/DevelWeatherBack/tree/master
 
 
 # Instalação do projeto
