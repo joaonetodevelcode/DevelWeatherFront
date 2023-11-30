@@ -13,8 +13,7 @@ export default function ScreenRegister({navigation}: any) {
     const [password, setPassword] = useState('');
 
     async function handleRegister() {
-        const response = await userRegister(name, cel, email, password)
-        console.log(response.message)
+        await userRegister(name, cel, email, password)
         setName('')
         setCel('')
         setEmail('')
