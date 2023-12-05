@@ -2,11 +2,11 @@ import axios from "axios";
 
 const url = "https://api.openweathermap.org/data/2.5/"
 const url2 = "https://pro.openweathermap.org/data/2.5/"
-const key = "9f17eff0b09150069908363188a029c6"
+const key = process.env.API_WEATHER_KEY
 
 
 export async function getCurrentClimateData(cityName: string | undefined) {
-    const climateData: Array<any> = []
+    const climateData: Array<string> = []
     try{
         const response = await axios.get(`${url}weather?q=${cityName}&appid=${key}`)
 
@@ -21,7 +21,6 @@ export async function getCurrentClimateData(cityName: string | undefined) {
             climateData[5] = climate.wind.speed
             climateData[6] = climate.clouds.all
         }
-
         return climateData
 
     } catch(erro) {
@@ -31,7 +30,7 @@ export async function getCurrentClimateData(cityName: string | undefined) {
 }
 
 export async function getTomorrowClimateData(cityName: string | undefined) {
-    const climateData: Array<any> = []
+    const climateData: Array<string> = []
     
     try{
         const response = await axios.get(`${url2}forecast/hourly?q=${cityName}&appid=${key}`)
@@ -54,8 +53,5 @@ export async function getTomorrowClimateData(cityName: string | undefined) {
         climateData[0] = 'Requisição falhou'
         return climateData
     }
-    
-
-    
 }
 

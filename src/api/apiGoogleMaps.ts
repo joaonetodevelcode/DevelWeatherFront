@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const url = "https://maps.googleapis.com/maps/api/geocode/json?"
-const key = "AIzaSyDHNR1fqjETF0dodsgE1dlMV1F-WFjbTx4"
-const dados = "plus_code"
+const key = process.env.API_GOOGLEMAPS_KEY
 
 export async function getCityName(lat: number | undefined, lon: number | undefined) {
     try{
