@@ -1,11 +1,10 @@
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet } from 'react-native';
-
-import LottieView from "lottie-react-native";
-import loading from '../../assets/icons/loading.json'
-
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import LottieView from "lottie-react-native";
+
+import loading from '../../assets/icons/loading.json'
 
 export default function ScreenLoading() {
 

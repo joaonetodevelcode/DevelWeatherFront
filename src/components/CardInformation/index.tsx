@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 
 import iconChuva from '../../assets/icons/cardinformation/chanceOfRain.png'
 import iconHumidade from '../../assets/icons/cardinformation/humidity.png'

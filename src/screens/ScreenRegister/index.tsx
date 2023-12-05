@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import Button from '../../components/Button';
-import { InputText } from '../../components/inputText';
-import { styles } from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
-import { userRegister } from '../../service/registerService';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
+import { styles } from './styles';
+import Button from '../../components/Button';
+import { InputText } from '../../components/inputText';
+import { userRegister } from '../../service/registerService';
+
 export default function ScreenRegister({navigation}: any) {
-    const [name, setName] = useState('');
-    const [cel, setCel] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [name, setName] = useState<string>('');
+    const [cel, setCel] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
     async function handleRegister() {
         await userRegister(name, cel, email, password)

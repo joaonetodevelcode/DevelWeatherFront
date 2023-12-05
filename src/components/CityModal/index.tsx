@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { FlatList, View, StyleSheet, Text, TouchableOpacity, Platform } from 'react-native';
+import React from "react";
+import { FlatList, View, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+
 import { CardCity } from "../CardCity/idex";
 import { CITYS, insertInCitys } from "../../mocks/citys";
 import PlaceAutocomplete from "../PlaceAutocomplete";
-import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+
+
 interface CityModalInterface {
     handleClose: () => void
     climateData: (dataCity: string ,cityName: string) => Promise<any>
-    userCity: string
 }
-
 
 export default function CityModal({
     handleClose,
     climateData,
-    userCity,
 }: CityModalInterface) {
     
     async function searchDataCity(city: string, nameCity: string) {
@@ -27,14 +27,6 @@ export default function CityModal({
         insertInCitys(nameCity, localCity)
         handleClose();
     }
-
-    if (!userCity){ 
-        
-        return ( 
-        <View style={styles.container} >
-            <Text>CARREGANDO...</Text>
-        </View>
-    )}
 
     return( 
     <View style={styles.container}>

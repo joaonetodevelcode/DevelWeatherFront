@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
-
 interface PlaceAutocompleteInterface {
   onPress: (data: any) => any
 }
@@ -15,7 +14,7 @@ function PlaceAutocomplete({onPress}: PlaceAutocompleteInterface) {
           placeholder='Insira uma nova Cidade'
           onPress={(data) => onPress(data)}
           query={{
-            key: 'AIzaSyDHNR1fqjETF0dodsgE1dlMV1F-WFjbTx4',
+            key: process.env.API_GOOGLEMAPS,
             language: 'pt-BR',
             type: '(cities)'
           }}

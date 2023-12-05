@@ -1,36 +1,35 @@
 import React, {useEffect, useState, useContext} from 'react';
 import { Text, Modal, TouchableOpacity, Image, BackHandler, View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from './styles';
+import {useBackHandler} from '@react-native-community/hooks'
 
+import CityModal from '../../components/CityModal';
+import ScreenLoading from '../ScreenLoading';
 import CardInformation from '../../components/CardInformation';
 import LottieView from "lottie-react-native";
 import CardTomorrow from '../../components/CardTomorrow';
 import iconLocation from '../../assets/icons/location.png';
 import iconSetaBaixo from '../../assets/icons/downArrow.png';
 import { getCurrentClimateData, getTomorrowClimateData } from '../../api/apiClimate';
-
 import { climates } from '../../api/climates';
-import ScreenLoading from '../ScreenLoading';
 import { requestLocation } from '../../service/locationService';
 import { temperatureConversion } from '../../service/temperatureService';
 import { getCityName } from '../../api/apiGoogleMaps';
-import CityModal from '../../components/CityModal';
 import { insertInCitys } from '../../mocks/citys';
 import { AuthContext } from '../../context/authContext';
-import {useBackHandler} from '@react-native-community/hooks'
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function ScreenMain({navigation}: any) {
-    const [visibleModal, setVisibleModal] = useState(false) 
-    const [cidade, setCidade] = useState('')
-    const [icone, setIcone] = useState(null)
-    const [temperatura, setTemperatura] = useState('')
-    const [humidade, setHumidade] = useState('')
-    const [chanceChuva, setChanceChuva] = useState('')
-    const [vento, setVento] = useState('')
-    const [temperaturaMax, setTemperaturaMax] = useState('')
-    const [temperaturaMin, setTemperaturaMin] = useState('')
+    const [visibleModal, setVisibleModal] = useState<boolean>(false) 
+    const [cidade, setCidade] = useState<string>('')
+    const [icone, setIcone] = useState<string | null>(null)
+    const [temperatura, setTemperatura] = useState<string>('')
+    const [humidade, setHumidade] = useState<string>('')
+    const [chanceChuva, setChanceChuva] = useState<string>('')
+    const [vento, setVento] = useState<string>('')
+    const [temperaturaMax, setTemperaturaMax] = useState<string>('')
+    const [temperaturaMin, setTemperaturaMin] = useState<string>('')
     const [climateDataTomorrow, setClimateDataTomorrow] = useState<any[]>([])
     let userLocation: number[] | undefined = []
     let cityName: string;
@@ -62,7 +61,6 @@ export default function ScreenMain({navigation}: any) {
             setChanceChuva(resultado[6])
             setCidade(cityName)
             setClimateDataTomorrow(climateTomorrow)
-            return
         }
     }
 
@@ -134,7 +132,6 @@ export default function ScreenMain({navigation}: any) {
                         <CityModal 
                             climateData={(dataCity: string ,cityName: string) => dadosClima(dataCity, cityName)}
                             handleClose={() => setVisibleModal(false)}
-                            userCity={cidade}
                             />
                     </Modal>
                 
@@ -158,8 +155,6 @@ export default function ScreenMain({navigation}: any) {
                 </View>
             
         </LinearGradient> 
-        </GestureHandlerRootView>
-
-        
+        </GestureHandlerRootView>        
     )
 }

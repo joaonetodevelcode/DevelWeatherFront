@@ -1,8 +1,6 @@
 import React from 'react';
-import { BackHandler } from 'react-native';
-import { useBackHandler } from '@react-native-community/hooks';
-import { renderHook } from '@testing-library/react-native';
 import { act, fireEvent, render } from '@testing-library/react-native';
+
 import ScreenMain from '../../src/screens/ScreenMain';
 import { requestForegroundPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 import axios from "axios";

@@ -16,7 +16,6 @@ export default function Button({valor, onPress}: ButtonProps) : JSX.Element
     )
 }
 
-
 const styles = StyleSheet.create({
     botao: {
         //height: '10%',

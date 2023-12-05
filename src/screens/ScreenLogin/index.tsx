@@ -1,17 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { Text, TouchableOpacity, View, BackHandler } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {useBackHandler} from '@react-native-community/hooks'
+import { LinearGradient } from 'expo-linear-gradient';
+
 import Button from '../../components/Button';
 import { InputText } from '../../components/inputText';
 import { styles } from './styles';
-import { LinearGradient } from 'expo-linear-gradient';
 import { AuthContext } from '../../context/authContext';
-import { requestLocation } from '../../service/locationService';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import {useBackHandler} from '@react-native-community/hooks'
 
 export default function ScreenLogin({navigation}: any) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
     const { login }: any = useContext(AuthContext);
 

@@ -1,11 +1,12 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 import ScreenLogin from '../screens/ScreenLogin';
 import ScreenRegister from '../screens/ScreenRegister';
 import ScreenMain from '../screens/ScreenMain';
 import AutomaticLogin from '../screens/AutomaticLogin';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator();
 

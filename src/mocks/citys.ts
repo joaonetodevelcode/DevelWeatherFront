@@ -5,7 +5,7 @@ interface City {
 
 export const CITYS: City[] = [];
 
-export function insertInCitys(nameCity: string, localCity: string, ) {
+export function insertInCitys(nameCity: string, localCity: string) {
     const exist = CITYS.find(city => city.name === nameCity)
     if(!exist) {
         const newObject1 = { name: nameCity, local: localCity}

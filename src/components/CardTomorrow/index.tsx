@@ -4,8 +4,6 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import iconChuva from '../../assets/icons/cardinformation/chanceOfRain.png'
 import iconHumidade from '../../assets/icons/cardinformation/humidity.png'
 import iconVento from '../../assets/icons/cardinformation/wind.png'
-import iconeTempo from '../../assets/icons/static/showerrain.png';
-
 import { temperatureConversion } from '../../service/temperatureService';
 
 interface CardTomorrowInterface {
@@ -16,7 +14,7 @@ interface CardTomorrowInterface {
     wind: string,
     clouds: string,
     color: string,
-    icon: any
+    icon: object
 }
 
 export default function CardTomorrow({
@@ -102,5 +100,3 @@ const styles = StyleSheet.create({
     },
 
 })
-
-//ba4f4c84c18821a70163d0b64c213110

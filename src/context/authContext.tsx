@@ -1,9 +1,9 @@
-import React, { ReactNode, createContext, useState } from "react";
+import React, { ReactNode, createContext, useState, useMemo } from "react";
 import { userLogin } from "../service/authService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type AuthProviderProps = {
-  children?: ReactNode | undefined;
+  children: ReactNode | undefined;
 }
 
 type AuthContextType = {
@@ -32,7 +32,10 @@ export function AuthProvider ({children}: AuthProviderProps) {
       await AsyncStorage.setItem('user', '')
     }
 
-    const value = {login, logout, user}
+    const value = useMemo(
+      () => ({login, logout, user}),
+      [login, logout, user]
+    );
 
     return (
         <AuthContext.Provider value={ value }>

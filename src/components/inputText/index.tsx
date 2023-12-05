@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, TextInput } from 'react-native'
 
 interface InputProps {
-    label?: string;
     placeholder: string;
     secureTextEntry?: boolean;
     value?: string;
@@ -10,7 +9,6 @@ interface InputProps {
   }
   
   export function InputText ({ 
-    label, 
     placeholder, 
     secureTextEntry = false,
     value,
