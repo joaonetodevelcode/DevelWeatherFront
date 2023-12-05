@@ -14,7 +14,7 @@ function PlaceAutocomplete({onPress}: PlaceAutocompleteInterface) {
           placeholder='Insira uma nova Cidade'
           onPress={(data) => onPress(data)}
           query={{
-            key: process.env.API_GOOGLEMAPS,
+            key: process.env.API_GOOGLEMAPS_KEY,
             language: 'pt-BR',
             type: '(cities)'
           }}
