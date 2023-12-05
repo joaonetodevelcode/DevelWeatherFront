@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import LottieView from "lottie-react-native";
 import loading from '../../assets/icons/loading.json'
 import { AuthContext } from '../../context/authContext';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function AutomaticLogin({navigation}: any) {
 
@@ -39,6 +40,7 @@ export default function AutomaticLogin({navigation}: any) {
     }, [])
 
     return(
+        <GestureHandlerRootView style={{ flex: 1 }}>
         <LinearGradient
         // Background Linear Gradient
         colors={['#29B2DD','#33AADD','#2DC8EA']}
@@ -53,6 +55,7 @@ export default function AutomaticLogin({navigation}: any) {
             />
             
         </LinearGradient> 
+        </GestureHandlerRootView>
     )
 }
 

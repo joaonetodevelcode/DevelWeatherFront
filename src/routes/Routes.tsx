@@ -5,11 +5,13 @@ import ScreenLogin from '../screens/ScreenLogin';
 import ScreenRegister from '../screens/ScreenRegister';
 import ScreenMain from '../screens/ScreenMain';
 import AutomaticLogin from '../screens/AutomaticLogin';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator();
 
 export default function Routes() {
     return (
+        <GestureHandlerRootView style={{ flex: 1 }}>
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen 
@@ -33,6 +35,7 @@ export default function Routes() {
                         gestureEnabled: false}}/>
             </Stack.Navigator>
         </NavigationContainer>
+        </GestureHandlerRootView>
     )
 }
 

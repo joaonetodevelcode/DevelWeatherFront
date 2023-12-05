@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View, BackHandler } from 'react-native';
 import Button from '../../components/Button';
 import { InputText } from '../../components/inputText';
 import { styles } from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
 import { AuthContext } from '../../context/authContext';
 import { requestLocation } from '../../service/locationService';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {useBackHandler} from '@react-native-community/hooks'
 
 export default function ScreenLogin({navigation}: any) {
     const [email, setEmail] = useState('');
@@ -25,7 +27,13 @@ export default function ScreenLogin({navigation}: any) {
         }
     }
 
+    useBackHandler(() => {
+        BackHandler.exitApp()
+        return true
+    })
+
     return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <LinearGradient
         // Background Linear Gradient
         colors={['#08244F', '#134CB5', '#0B42AB']}
@@ -56,6 +64,7 @@ export default function ScreenLogin({navigation}: any) {
             </TouchableOpacity>
         </View>
     </LinearGradient>
+    </GestureHandlerRootView>
     
     )
 };

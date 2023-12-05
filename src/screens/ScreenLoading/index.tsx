@@ -5,9 +5,12 @@ import { StyleSheet } from 'react-native';
 import LottieView from "lottie-react-native";
 import loading from '../../assets/icons/loading.json'
 
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 export default function ScreenLoading() {
 
     return(
+        <GestureHandlerRootView style={{ flex: 1 }}>
         <LinearGradient
         // Background Linear Gradient
         colors={['#29B2DD','#33AADD','#2DC8EA']}
@@ -22,6 +25,7 @@ export default function ScreenLoading() {
             />
             
         </LinearGradient> 
+        </GestureHandlerRootView>
     )
 }
 

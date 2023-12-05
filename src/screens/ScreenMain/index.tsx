@@ -19,6 +19,7 @@ import CityModal from '../../components/CityModal';
 import { insertInCitys } from '../../mocks/citys';
 import { AuthContext } from '../../context/authContext';
 import {useBackHandler} from '@react-native-community/hooks'
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function ScreenMain({navigation}: any) {
     const [visibleModal, setVisibleModal] = useState(false) 
@@ -82,6 +83,7 @@ export default function ScreenMain({navigation}: any) {
     if (!icone) return <ScreenLoading />
     
     return(
+        <GestureHandlerRootView style={{ flex: 1 }}>
         <LinearGradient
         // Background Linear Gradient
         colors={climates[`${icone}`].cor}
@@ -109,7 +111,7 @@ export default function ScreenMain({navigation}: any) {
 
                 <View style={styles.contentInfos}>
 
-                    <View style={{width: 300, height: 250}}>
+                    <View style={{width: 250, height: 200}}>
                         <LottieView source={climates[`${icone}`].dinamico}
                             autoPlay={true}
                             loop={true}
@@ -156,6 +158,7 @@ export default function ScreenMain({navigation}: any) {
                 </View>
             
         </LinearGradient> 
+        </GestureHandlerRootView>
 
         
     )

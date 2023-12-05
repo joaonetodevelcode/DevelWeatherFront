@@ -5,6 +5,7 @@ import { InputText } from '../../components/inputText';
 import { styles } from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
 import { userRegister } from '../../service/registerService';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function ScreenRegister({navigation}: any) {
     const [name, setName] = useState('');
@@ -21,6 +22,7 @@ export default function ScreenRegister({navigation}: any) {
     }
 
     return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <LinearGradient
         // Background Linear Gradient
         colors={['#08244F', '#134CB5', '#0B42AB']}
@@ -61,5 +63,6 @@ export default function ScreenRegister({navigation}: any) {
             </TouchableOpacity>
         </View>
     </LinearGradient>
+    </GestureHandlerRootView>
     )
 };
