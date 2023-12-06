@@ -5,23 +5,6 @@ O DevelWetaher tem como principal função permitir que o usuário tenha informa
 
 # Como instalar?
 
-# Primeiros passos
+Você poderá instalar o aplicativo acessando o link https://expo.dev/accounts/jbss.neto/projects/DevelWeatherFront/builds/ac64e8fe-95db-44db-a7f2-d0bdc537b2cc 
 
-- O Nodejs deve estar instalado em seu computador. Para isso você pode seguir o seguinte link: https://nodejs.org/en/download
-
-
-- Você terá que utilizar o Expo Go para testar a aplicação. Para isso poderá instalar tanto em seu celular com o link https://expo.dev/client, ou utilizar o Android estudio seguindo os passos do tópico "Ambiente de desenvolvimento Android" no link : https://reactnative.dev/docs/environment-setup?guide=native
-
-
-- É necessário que siga os passos da instalação da API responsável pelo login e cadastro de usuários. Para isso você pode seguir o link: https://github.com/joaonetodevelcode/DevelWeatherBack/tree/master
-
-
-# Instalação do projeto
-
-- Agora você poderá fazer o clone ou baixar o zip na branch "development"
-
-
-- Acesse o diretório raiz do projeto, abra um terminal de comando nesse diretório, e digite o comando "npm install" para instalar as dependencias do projeto
-
-
-- Para iniciar o projeto agora você deverá digitar "npm start", e acessa-lo com Expo Go.
+obs: o sistema de autenciação nessecita de um servidor online, por esse motivo foi retirado. Basta clicar no botão de entrar para acessar o aplicativo.
