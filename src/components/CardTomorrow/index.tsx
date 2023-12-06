@@ -14,7 +14,8 @@ interface CardTomorrowInterface {
     wind: string,
     clouds: string,
     color: string,
-    icon: object
+    icon: object,
+    date: string
 }
 
 export default function CardTomorrow({
@@ -25,13 +26,14 @@ export default function CardTomorrow({
     wind,
     clouds,
     color,
-    icon
+    icon,
+    date
 }: CardTomorrowInterface) {
     return(
         <View style={[styles.container, {backgroundColor: color}]}>
             <View style={styles.amanha}>
                 <Text style={styles.titulo}>Amanhã</Text>
-                <Text style={styles.texto2}>Mar,9</Text>
+                <Text style={styles.texto2}>{date}</Text>
             </View>
 
             <View style={styles.containerInfos}>

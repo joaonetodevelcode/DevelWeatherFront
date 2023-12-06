@@ -31,9 +31,10 @@ export default function ScreenMain({navigation}: any) {
     const [temperaturaMax, setTemperaturaMax] = useState<string>('')
     const [temperaturaMin, setTemperaturaMin] = useState<string>('')
     const [climateDataTomorrow, setClimateDataTomorrow] = useState<any[]>([])
+    const [dateTomorrow, setDateTomorrow] = useState<string>("")
     let userLocation: number[] | undefined = []
     let cityName: string;
-
+    
     const {logout}: any = useContext(AuthContext) 
 
     async function getUserLocation() {
@@ -60,7 +61,7 @@ export default function ScreenMain({navigation}: any) {
             setVento(resultado[5])
             setChanceChuva(resultado[6])
             setCidade(cityName)
-            setClimateDataTomorrow(climateTomorrow)
+            setClimateDataTomorrow(climateTomorrow);
         }
     }
 
@@ -68,9 +69,18 @@ export default function ScreenMain({navigation}: any) {
         logout()
         navigation.navigate('Login')
     }
+
+    function getTomorrowDate() {
+        const date = new Date();
+        date.setDate(date.getDate() + 1);
+        const month = date.toLocaleString('pt-BR', {month: 'short'})
+        const day = date.getDate();
+        setDateTomorrow(`${month} ${day}`);
+    }
     
     useEffect(() => {
         getUserLocation();  
+        getTomorrowDate();
     }, []);
 
     useBackHandler(() => {
@@ -151,6 +161,7 @@ export default function ScreenMain({navigation}: any) {
                         clouds={climateDataTomorrow[6]}
                         color={climates[`${icone}`].background}
                         icon={climates[`${icone}`].estatico}
+                        date = {dateTomorrow}
                     />
                 </View>
             
