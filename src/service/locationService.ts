@@ -5,9 +5,20 @@ const location: number[] = []
 
 export async function requestLocation() {
     const { granted } = await requestForegroundPermissionsAsync();
+
+    const waitingRequest = new Promise((_, reject) => {
+        const timeoutId = setTimeout(() => {
+          clearTimeout(timeoutId);
+          reject(new Error('Houve um erro ao acessar sua localização'));
+        }, 15000);
+      });
+
     if(granted === true) {
         try {
-            const curretPosition = await getCurrentPositionAsync();
+            const curretPosition: any = await Promise.race([
+                getCurrentPositionAsync(),
+                waitingRequest
+            ]) 
             location[0] = curretPosition.coords.latitude;
             location[1] = curretPosition.coords.longitude;
         }catch(erro){
